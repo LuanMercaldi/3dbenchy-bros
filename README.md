@@ -7,7 +7,6 @@ E-commerce de produtos de impressão 3D com design único inspirado nos jogos re
 
 ## 🚀 Acesso
 - **Site:** https://3dbenchybros.com.br
-- **Admin:** https://3dbenchybros.com.br/admin.html
 
 ## 🎨 Características
 - Design pixelizado dos anos 80
