@@ -6,6 +6,177 @@
     <title>3DBenchy Bros. - Impressão 3D Pixelizada</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <style>
+        /* HEADER FIXO PIXELIZADO */
+.pixel-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-bottom: 3px solid #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(255, 0, 255, 0.2);
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ff00ff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+}
+
+.logo-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.header-nav {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    color: #00ff00;
+    text-decoration: none;
+    padding: 8px 15px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+}
+
+.nav-link:hover {
+    border-color: #00ff00;
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.action-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    padding: 8px 12px;
+    border: 2px solid;
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.login-btn {
+    color: #ff00ff;
+    border-color: #ff00ff;
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+}
+
+.login-btn:hover {
+    background: rgba(255, 0, 255, 0.2);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.register-btn {
+    color: #00ffff;
+    border-color: #00ffff;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
+.register-btn:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.cart-container {
+    position: relative;
+}
+
+.cart-icon-new {
+    font-size: 20px;
+    color: #00ff00;
+    cursor: pointer;
+    padding: 8px;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    background: rgba(0, 255, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cart-icon-new:hover {
+    background: rgba(0, 255, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    transform: scale(1.1);
+}
+
+.cart-count {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    background: #ff00ff;
+    color: #000;
+    padding: 2px 6px;
+    border-radius: 4px;
+    min-width: 16px;
+    text-align: center;
+}
+
+/* AJUSTAR CONTEÚDO PARA NÃO FICAR ATRÁS DO HEADER */
+.container {
+    margin-top: 100px !important;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .header-nav {
+        display: none;
+    }
+    
+    .logo-text {
+        font-size: 12px;
+    }
+    
+    .action-btn {
+        font-size: 6px;
+        padding: 6px 8px;
+    }
+    
+    .header-actions {
+        gap: 10px;
+    }
+}
+
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         
         * {
@@ -83,20 +254,6 @@
         .user-status a:hover {
             background: #00ff00;
             color: #000;
-        }
-        
-        .cart-icon {
-            position: fixed;
-            top: 20px;
-            right: 280px;
-            background: linear-gradient(45deg, #ff00ff, #00ffff);
-            border: 2px solid #00ff00;
-            border-radius: 8px;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
-            transition: all 0.3s ease;
         }
         
         .cart-icon:hover {
@@ -622,12 +779,7 @@
             .container {
                 padding: 10px;
             }
-            
-            .user-status {
-                position: static;
-                justify-content: center;
-                margin-bottom: 15px;
-            }
+        
             
             .cart-icon {
                 position: static;
@@ -666,7 +818,7 @@
             .filter-btn {
                 padding: 10px 15px;
                 font-size: 7px;
-                width: 100%;
+                wi dth: 100%;
                 max-width: 300px;
                 margin: 0 auto;
             }
@@ -687,14 +839,34 @@
     
     <div class="container">
         <header>
-            <div class="user-status" id="userStatus">
-                <a href="/auth/login">Login</a>
-                <a href="/auth/register">Cadastro</a>
+           <!-- NOVO HEADER FIXO PIXELIZADO -->
+<header class="pixel-header">
+    <div class="header-container">
+        <!-- Logo -->
+        <div class="header-logo">
+            <img src="logo.png" alt="3DBenchy Bros" class="logo-img">
+            <span class="logo-text">3DBenchy Bros.</span>
+        </div>
+        
+        <!-- Menu Central -->
+        <nav class="header-nav">
+            <a href="#inicio" class="nav-link">INÍCIO</a>
+            <a href="#produtos" class="nav-link">PRODUTOS</a>
+            <a href="#categorias" class="nav-link">CATEGORIAS</a>
+        </nav>
+        
+        <!-- Ações do Usuário -->
+        <div class="header-actions">
+            <button class="action-btn login-btn" onclick="window.location.href='/auth/login'">LOGIN</button>
+            <button class="action-btn register-btn" onclick="window.location.href='/auth/register'">CADASTRO</button>
+            <div class="cart-container">
+                <div class="cart-icon-new" onclick="toggleCart()">
+                    🛒 <span class="cart-count" id="cartCount">0</span>
+                </div>
             </div>
-            
-            <div class="cart-icon" onclick="toggleCart()">
-                🛒 <span class="cart-count" id="cartCount">0</span>
-            </div>
+        </div>
+    </div>
+</header>
             
             <img src="logo.png" alt="3DBenchy Bros. Logo" class="logo">
             <h1 style="font-size: 24px; color: #00ffff; text-shadow: 3px 3px 0px #000;">3DBenchy Bros.</h1>
