@@ -849,6 +849,204 @@
                 font-size: 8px;
             }
         }
+        
+/* MODAL DE LOGIN */
+        
+            .modal-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(5px);
+                z-index: 10000;
+                animation: fadeIn 0.3s ease;
+            }
+
+            .modal-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+                border: 3px solid #00ffff;
+                border-radius: 15px;
+                box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(255, 0, 255, 0.3);
+                width: 90%;
+                max-width: 400px;
+                animation: slideIn 0.3s ease;
+            }
+
+            .modal-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px;
+                border-bottom: 2px solid #ff00ff;
+            }
+
+            .modal-title {
+                font-family: 'Press Start 2P', cursive;
+                font-size: 12px;
+                color: #00ffff;
+                text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+                margin: 0;
+            }
+
+            .modal-close {
+                background: none;
+                border: 2px solid #ff00ff;
+                color: #ff00ff;
+                font-size: 20px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .modal-close:hover {
+                background: rgba(255, 0, 255, 0.2);
+                transform: scale(1.1);
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .login-form {
+                margin-bottom: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group label {
+                font-family: 'Press Start 2P', cursive;
+                font-size: 8px;
+                color: #00ff00;
+                display: block;
+                margin-bottom: 5px;
+                text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 10px;
+                background: rgba(0, 0, 0, 0.5);
+                border: 2px solid #00ffff;
+                border-radius: 8px;
+                color: #fff;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 8px;
+                box-sizing: border-box;
+            }
+
+            .form-group input:focus {
+                outline: none;
+                border-color: #ff00ff;
+                box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            }
+
+            .form-buttons {
+                display: flex;
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            .btn-login, .btn-register {
+                flex: 1;
+                padding: 12px;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 8px;
+                border: 2px solid;
+                border-radius: 8px;
+                background: transparent;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+            }
+
+            .btn-login {
+                color: #00ffff;
+                border-color: #00ffff;
+            }
+
+            .btn-login:hover {
+                background: rgba(0, 255, 255, 0.2);
+                box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            }
+
+            .btn-register {
+                color: #00ff00;
+                border-color: #00ff00;
+            }
+
+            .btn-register:hover {
+                background: rgba(0, 255, 0, 0.2);
+                box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            }
+
+            .login-divider {
+                text-align: center;
+                margin: 20px 0;
+                color: #888;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 8px;
+            }
+
+            .social-login {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn-google, .btn-github {
+                width: 100%;
+                padding: 12px;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 8px;
+                border: 2px solid;
+                border-radius: 8px;
+                background: transparent;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .btn-google {
+                color: #4285f4;
+                border-color: #4285f4;
+            }
+
+            .btn-google:hover {
+                background: rgba(66, 133, 244, 0.2);
+                box-shadow: 0 0 15px rgba(66, 133, 244, 0.5);
+            }
+
+            .btn-github {
+                color: #333;
+                border-color: #333;
+                background: #fff;
+            }
+            
+            .btn-github:hover {
+                background: #f0f0f0;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            @keyframes slideIn {
+                from { transform: translate(-50%, -60%); opacity: 0; }
+                to { transform: translate(-50%, -50%); opacity: 1; }
+            }
+            
     </style>
 </head>
 <body>
@@ -874,8 +1072,8 @@
         
         <!-- Ações do Usuário -->
         <div class="header-actions">
-            <button class="action-btn login-btn" onclick="window.location.href='/auth/login'">LOGIN</button>
-            <button class="action-btn register-btn" onclick="window.location.href='/auth/register'">CADASTRO</button>
+            <button class="action-btn login-btn" onclick="openLoginModal()">LOGIN</button>
+            <button class="action-btn register-btn" onclick="openLoginModal()">CADASTRO</button>
             <div class="cart-container">
                 <div class="cart-icon-new" onclick="toggleCart()">
                     🛒 <span class="cart-count" id="cartCount">0</span>
@@ -1390,6 +1588,247 @@
             }
         });
     </script>
+    
+<!-- MODAL DE LOGIN HÍBRIDO -->
+<div id="loginModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">🎮 LOGIN 3DBENCHY BROS</h2>
+            <button class="modal-close" onclick="closeLoginModal()">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+            <!-- FORMULÁRIO LOCAL -->
+            <form id="localLoginForm" class="login-form">
+                <div class="form-group">
+                    <label>📧 EMAIL:</label>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>🔒 SENHA:</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="submit" class="btn-login">🚀 ENTRAR</button>
+                    <button type="button" class="btn-register" onclick="showRegisterForm()">📝 CADASTRO</button>
+                </div>
+            </form>
+            
+            <!-- FORMULÁRIO DE CADASTRO -->
+            <form id="registerForm" class="login-form" style="display: none;">
+                <div class="form-group">
+                    <label>👤 NOME:</label>
+                    <input type="text" id="registerName" placeholder="Seu Nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>📧 EMAIL:</label>
+                    <input type="email" id="registerEmail" placeholder="seu@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>🔒 SENHA:</label>
+                    <input type="password" id="registerPassword" placeholder="••••••••" required>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="submit" class="btn-register">📝 CRIAR CONTA</button>
+                    <button type="button" class="btn-login" onclick="showLoginForm()">🔙 VOLTAR</button>
+                </div>
+            </form>
+            
+            <!-- DIVISOR -->
+            <div class="login-divider">
+                <span>──────── OU ────────</span>
+            </div>
+            
+            <!-- LOGIN SOCIAL -->
+            <div class="social-login">
+                <button class="btn-google" onclick="loginWithGoogle()">
+                    🔵 ENTRAR COM GOOGLE
+                </button>
+                
+                <button class="btn-github" onclick="loginWithGitHub()">
+                    ⚫ ENTRAR COM GITHUB
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+// SISTEMA DE LOGIN HÍBRIDO
+let currentUser = null;
+
+// ABRIR MODAL DE LOGIN
+function openLoginModal() {
+    document.getElementById('loginModal').style.display = 'block';
+    showLoginForm();
+}
+
+// FECHAR MODAL
+function closeLoginModal() {
+    document.getElementById('loginModal').style.display = 'none';
+}
+
+// MOSTRAR FORMULÁRIO DE LOGIN
+function showLoginForm() {
+    document.getElementById('localLoginForm').style.display = 'block';
+    document.getElementById('registerForm').style.display = 'none';
+}
+
+// MOSTRAR FORMULÁRIO DE CADASTRO
+function showRegisterForm() {
+    document.getElementById('localLoginForm').style.display = 'none';
+    document.getElementById('registerForm').style.display = 'block';
+}
+
+// LOGIN LOCAL
+document.getElementById('localLoginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    // VERIFICAR SE USUÁRIO EXISTE
+    const users = JSON.parse(localStorage.getItem('3dbenchy_users') || '[]');
+    const user = users.find(u => u.email === email && u.password === password);
+    
+    if (user) {
+        loginSuccess(user);
+    } else {
+        alert('❌ Email ou senha incorretos!');
+    }
+});
+
+// CADASTRO LOCAL
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('registerName').value;
+    const email = document.getElementById('registerEmail').value;
+    const password = document.getElementById('registerPassword').value;
+    
+    // VERIFICAR SE EMAIL JÁ EXISTE
+    const users = JSON.parse(localStorage.getItem('3dbenchy_users') || '[]');
+    
+    if (users.find(u => u.email === email)) {
+        alert('❌ Este email já está cadastrado!');
+        return;
+    }
+    
+    // CRIAR NOVO USUÁRIO
+    const newUser = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        password: password,
+        type: 'local',
+        createdAt: new Date().toISOString()
+    };
+    
+    users.push(newUser);
+    localStorage.setItem('3dbenchy_users', JSON.stringify(users));
+    
+    alert('✅ Conta criada com sucesso!');
+    loginSuccess(newUser);
+});
+
+// LOGIN COM GOOGLE
+function loginWithGoogle() {
+    // SIMULAÇÃO - EM PRODUÇÃO USAR GOOGLE API
+    const googleUser = {
+        id: 'google_' + Date.now(),
+        name: 'Usuário Google',
+        email: 'usuario@gmail.com',
+        type: 'google',
+        avatar: 'https://via.placeholder.com/50'
+    };
+    
+    alert('🔵 Login com Google simulado!' );
+    loginSuccess(googleUser);
+}
+
+// LOGIN COM GITHUB
+function loginWithGitHub() {
+    // SIMULAÇÃO - EM PRODUÇÃO USAR GITHUB API
+    const githubUser = {
+        id: 'github_' + Date.now(),
+        name: 'Usuário GitHub',
+        email: 'usuario@github.com',
+        type: 'github',
+        avatar: 'https://via.placeholder.com/50'
+    };
+    
+    alert('⚫ Login com GitHub simulado!' );
+    loginSuccess(githubUser);
+}
+
+// SUCESSO NO LOGIN
+function loginSuccess(user) {
+    currentUser = user;
+    localStorage.setItem('3dbenchy_current_user', JSON.stringify(user));
+    
+    // ATUALIZAR INTERFACE
+    updateUserInterface();
+    closeLoginModal();
+    
+    alert(`🎉 Bem-vindo, ${user.name}!`);
+}
+
+// ATUALIZAR INTERFACE DO USUÁRIO
+function updateUserInterface() {
+    if (currentUser) {
+        // ESCONDER BOTÕES LOGIN/CADASTRO
+        document.querySelector('.login-btn').style.display = 'none';
+        document.querySelector('.register-btn').style.display = 'none';
+        
+        // MOSTRAR INFO DO USUÁRIO
+        const userInfo = document.createElement('div');
+        userInfo.className = 'user-info';
+        userInfo.innerHTML = `
+            <span class="user-name">👤 ${currentUser.name}</span>
+            <button class="btn-logout" onclick="logout()">🚪 SAIR</button>
+        `;
+        
+        document.querySelector('.header-actions').insertBefore(userInfo, document.querySelector('.cart-container'));
+    }
+}
+
+// LOGOUT
+function logout() {
+    currentUser = null;
+    localStorage.removeItem('3dbenchy_current_user');
+    
+    // RESTAURAR INTERFACE
+    document.querySelector('.login-btn').style.display = 'inline-block';
+    document.querySelector('.register-btn').style.display = 'inline-block';
+    
+    const userInfo = document.querySelector('.user-info');
+    if (userInfo) {
+        userInfo.remove();
+    }
+    
+    alert('👋 Logout realizado com sucesso!');
+}
+
+// VERIFICAR SE JÁ ESTÁ LOGADO
+window.addEventListener('load', function() {
+    const savedUser = localStorage.getItem('3dbenchy_current_user');
+    if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        updateUserInterface();
+    }
+});
+
+// FECHAR MODAL CLICANDO FORA
+document.getElementById('loginModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeLoginModal();
+    }
+});
+</script>
 </body>
 </html>
 
