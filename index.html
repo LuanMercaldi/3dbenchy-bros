@@ -31,16 +31,6 @@
     padding: 0 20px;
 }
 
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
 .header-logo {
     display: flex;
     align-items: center;
@@ -96,7 +86,6 @@
     align-items: center;
     gap: 15px;
 }
-
 
 .action-btn {
     font-family: 'Press Start 2P', cursive;
@@ -167,6 +156,39 @@
     border-radius: 4px;
     min-width: 16px;
     text-align: center;
+}
+
+/* ESTILOS PARA USUÁRIO LOGADO */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+}
+
+.user-name {
+    color: #00ff00;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+}
+
+.btn-logout {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 7px;
+    padding: 6px 10px;
+    border: 2px solid #ff0000;
+    border-radius: 6px;
+    background: transparent;
+    color: #ff0000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-logout:hover {
+    background: rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+    transform: scale(1.05);
 }
 
 /* AJUSTAR CONTEÚDO PARA NÃO FICAR ATRÁS DO HEADER */
@@ -247,44 +269,6 @@
             border-radius: 10px;
             box-shadow: 0 0 20px #00ffff;
             position: relative;
-        }
-        
-        .user-status {
-           position: absolute;
-            top: 10px;
-            right: 380px;
-            font-size: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .user-status a {
-            color: #00ff00;
-            text-decoration: none;
-            padding: 5px 10px;
-            border: 1px solid #00ff00;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-        
-        .user-status a:hover {
-            background: #00ff00;
-            color: #000;
-        }
-        
-        .cart-icon:hover {
-            background: rgba(255, 0, 255, 0.4);
-            transform: scale(1.1);
-        }
-        
-        .cart-count {
-            background: #ff0000;
-            color: #fff;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 8px;
-            margin-left: 5px;
         }
         
         .logo {
@@ -791,262 +775,8 @@
             font-size: 10px;
             padding: 40px;
         }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-        
-            
-            .cart-icon {
-                position: static;
-                display: inline-block;
-                margin-bottom: 15px;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 20px;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-            
-            .contact-info {
-                grid-template-columns: 1fr;
-            }
-            
-            /* Responsividade dos filtros */
-            .collection-filters {
-                padding: 20px 15px;
-            }
-            
-            .filters-title {
-                font-size: 10px;
-                margin-bottom: 15px;
-            }
-            
-            .filter-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .filter-btn {
-                padding: 10px 15px;
-                font-size: 7px;
-                wi dth: 100%;
-                max-width: 300px;
-                margin: 0 auto;
-            }
-            
-            .products-counter {
-                padding: 12px;
-                margin: 15px 0;
-            }
-            
-            .products-counter span {
-                font-size: 8px;
-            }
-        }
-        
+
 /* MODAL DE LOGIN */
-        
-            .modal-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.8);
-                backdrop-filter: blur(5px);
-                z-index: 10000;
-                animation: fadeIn 0.3s ease;
-            }
-
-            .modal-content {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-                border: 3px solid #00ffff;
-                border-radius: 15px;
-                box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(255, 0, 255, 0.3);
-                width: 90%;
-                max-width: 400px;
-                animation: slideIn 0.3s ease;
-            }
-
-            .modal-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 20px;
-                border-bottom: 2px solid #ff00ff;
-            }
-
-            .modal-title {
-                font-family: 'Press Start 2P', cursive;
-                font-size: 12px;
-                color: #00ffff;
-                text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
-                margin: 0;
-            }
-
-            .modal-close {
-                background: none;
-                border: 2px solid #ff00ff;
-                color: #ff00ff;
-                font-size: 20px;
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-
-            .modal-close:hover {
-                background: rgba(255, 0, 255, 0.2);
-                transform: scale(1.1);
-            }
-
-            .modal-body {
-                padding: 20px;
-            }
-
-            .login-form {
-                margin-bottom: 20px;
-            }
-
-            .form-group {
-                margin-bottom: 15px;
-            }
-
-            .form-group label {
-                font-family: 'Press Start 2P', cursive;
-                font-size: 8px;
-                color: #00ff00;
-                display: block;
-                margin-bottom: 5px;
-                text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
-            }
-
-            .form-group input {
-                width: 100%;
-                padding: 10px;
-                background: rgba(0, 0, 0, 0.5);
-                border: 2px solid #00ffff;
-                border-radius: 8px;
-                color: #fff;
-                font-family: 'Press Start 2P', cursive;
-                font-size: 8px;
-                box-sizing: border-box;
-            }
-
-            .form-group input:focus {
-                outline: none;
-                border-color: #ff00ff;
-                box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
-            }
-
-            .form-buttons {
-                display: flex;
-                gap: 10px;
-                margin-top: 20px;
-            }
-
-            .btn-login, .btn-register {
-                flex: 1;
-                padding: 12px;
-                font-family: 'Press Start 2P', cursive;
-                font-size: 8px;
-                border: 2px solid;
-                border-radius: 8px;
-                background: transparent;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                text-transform: uppercase;
-            }
-
-            .btn-login {
-                color: #00ffff;
-                border-color: #00ffff;
-            }
-
-            .btn-login:hover {
-                background: rgba(0, 255, 255, 0.2);
-                box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-            }
-
-            .btn-register {
-                color: #00ff00;
-                border-color: #00ff00;
-            }
-
-            .btn-register:hover {
-                background: rgba(0, 255, 0, 0.2);
-                box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-            }
-
-            .login-divider {
-                text-align: center;
-                margin: 20px 0;
-                color: #888;
-                font-family: 'Press Start 2P', cursive;
-                font-size: 8px;
-            }
-
-            .social-login {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .btn-google, .btn-github {
-                width: 100%;
-                padding: 12px;
-                font-family: 'Press Start 2P', cursive;
-                font-size: 8px;
-                border: 2px solid;
-                border-radius: 8px;
-                background: transparent;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-
-            .btn-google {
-                color: #4285f4;
-                border-color: #4285f4;
-            }
-
-            .btn-google:hover {
-                background: rgba(66, 133, 244, 0.2);
-                box-shadow: 0 0 15px rgba(66, 133, 244, 0.5);
-            }
-
-            .btn-github {
-                color: #333;
-                border-color: #333;
-                background: #fff;
-            }
-            
-            .btn-github:hover {
-                background: #f0f0f0;
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            }
-            
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-            }
-            
-            @keyframes slideIn {
-                from { transform: translate(-50%, -60%); opacity: 0; }
-                to { transform: translate(-50%, -50%); opacity: 1; }
-            }
-            /* MODAL DE LOGIN */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -1241,43 +971,93 @@
     from { transform: translate(-50%, -60%); opacity: 0; }
     to { transform: translate(-50%, -50%); opacity: 1; }
 }
-
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Responsividade dos filtros */
+            .collection-filters {
+                padding: 20px 15px;
+            }
+            
+            .filters-title {
+                font-size: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 10px 15px;
+                font-size: 7px;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            
+            .products-counter {
+                padding: 12px;
+                margin: 15px 0;
+            }
+            
+            .products-counter span {
+                font-size: 8px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="pixel-bg"></div>
     
-    <div class="container">
-        <header>
-           <!-- NOVO HEADER FIXO PIXELIZADO -->
-<header class="pixel-header">
-    <div class="header-container">
-        <!-- Logo -->
-        <div class="header-logo">
-            <img src="logo.png" alt="3DBenchy Bros" class="logo-img">
-            <span class="logo-text">3DBenchy Bros.</span>
-        </div>
-        
-        <!-- Menu Central -->
-        <nav class="header-nav">
-            <a href="#inicio" class="nav-link">INÍCIO</a>
-            <a href="#produtos" class="nav-link">PRODUTOS</a>
-            <a href="#categorias" class="nav-link">CATEGORIAS</a>
-        </nav>
-        
-        <!-- Ações do Usuário -->
-        <div class="header-actions">
-            <button class="action-btn login-btn" onclick="openLoginModal()">LOGIN</button>
-            <button class="action-btn register-btn" onclick="openLoginModal()">CADASTRO</button>
-            <div class="cart-container">
-            <div class="cart-icon-new" onclick="toggleCart()">
-                🛒 <span class="cart-count" id="cartCount">0</span>
+    <!-- NOVO HEADER FIXO PIXELIZADO -->
+    <header class="pixel-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo">
+                <img src="logo.png" alt="3DBenchy Bros" class="logo-img">
+                <span class="logo-text">3DBenchy Bros.</span>
+            </div>
+            
+            <!-- Menu Central -->
+            <nav class="header-nav">
+                <a href="#inicio" class="nav-link">INÍCIO</a>
+                <a href="#produtos" class="nav-link">PRODUTOS</a>
+                <a href="#categorias" class="nav-link">CATEGORIAS</a>
+            </nav>
+            
+            <!-- Ações do Usuário -->
+            <div class="header-actions">
+                <button class="action-btn login-btn" onclick="openLoginModal()">LOGIN</button>
+                <button class="action-btn register-btn" onclick="openLoginModal()">CADASTRO</button>
+                <div class="cart-container">
+                    <div class="cart-icon-new" onclick="toggleCart()">
+                        🛒 <span class="cart-count" id="cartCount">0</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
-            
+    </header>
+    
+    <div class="container">
+        <header>
             <img src="logo.png" alt="3DBenchy Bros. Logo" class="logo">
             <h1 style="font-size: 24px; color: #00ffff; text-shadow: 3px 3px 0px #000;">3DBenchy Bros.</h1>
             <p class="tagline">Impressão 3D com Estilo Retro • Colecionáveis Únicos • Qualidade Pixelizada</p>
@@ -1448,88 +1228,109 @@
         </div>
     </div>
     
+    <!-- MODAL DE LOGIN HÍBRIDO -->
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🎮 LOGIN 3DBENCHY BROS</h2>
+                <button class="modal-close" onclick="closeLoginModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- FORMULÁRIO LOCAL -->
+                <form id="localLoginForm" class="login-form">
+                    <div class="form-group">
+                        <label>📧 EMAIL:</label>
+                        <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>🔒 SENHA:</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="btn-login">🚀 ENTRAR</button>
+                        <button type="button" class="btn-register" onclick="showRegisterForm()">📝 CADASTRO</button>
+                    </div>
+                </form>
+                
+                <!-- FORMULÁRIO DE CADASTRO -->
+                <form id="registerForm" class="login-form" style="display: none;">
+                    <div class="form-group">
+                        <label>👤 NOME:</label>
+                        <input type="text" id="registerName" placeholder="Seu Nome" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>📧 EMAIL:</label>
+                        <input type="email" id="registerEmail" placeholder="seu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>🔒 SENHA:</label>
+                        <input type="password" id="registerPassword" placeholder="••••••••" required>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="btn-register">📝 CRIAR CONTA</button>
+                        <button type="button" class="btn-login" onclick="showLoginForm()">🔙 VOLTAR</button>
+                    </div>
+                </form>
+                
+                <!-- DIVISOR -->
+                <div class="login-divider">
+                    <span>──────── OU ────────</span>
+                </div>
+                
+                <!-- LOGIN SOCIAL -->
+                <div class="social-login">
+                    <button class="btn-google" onclick="loginWithGoogle()">
+                        🔵 ENTRAR COM GOOGLE
+                    </button>
+                    
+                    <button class="btn-github" onclick="loginWithGitHub()">
+                        ⚫ ENTRAR COM GITHUB
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script>
         // Estado global da aplicação
         let currentUser = null;
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let products = [];
+        let products = [
+            // Produtos de exemplo para demonstração
+            { id: 1, name: "Action Figure Pixel Warrior", price: 45.90, category: "Action Figures" },
+            { id: 2, name: "Kit Avião F-16 Fighting Falcon", price: 89.90, category: "Kits Militares" },
+            { id: 3, name: "Benchy Colecionável Dourado", price: 35.90, category: "Colecionáveis" },
+            { id: 4, name: "Chaveiro Pixel Art", price: 15.90, category: "Acessórios" },
+            { id: 5, name: "Miniatura Arquitetônica", price: 65.90, category: "Decoração" },
+            { id: 6, name: "Action Figure Personalizada", price: 120.00, category: "Personalizados" }
+        ];
         let filteredProducts = [];
         let currentFilter = 'all';
         
         // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
-            checkUserStatus();
             loadProducts();
             updateCartDisplay();
+            
+            // Verificar se usuário já está logado
+            const savedUser = localStorage.getItem('3dbenchy_current_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateUserInterface();
+            }
         });
         
-        // Verificar status do usuário
-        async function checkUserStatus() {
-            try {
-                const response = await fetch('/auth/profile');
-                if (response.ok) {
-                    currentUser = await response.json();
-                    updateUserStatus();
-                }
-            } catch (error) {
-                console.log('Usuário não logado');
-            }
-        }
-        
-        // Atualizar display do status do usuário
-        function updateUserStatus() {
-            const userStatus = document.getElementById('userStatus');
-            if (currentUser) {
-                userStatus.innerHTML = `
-                    <span style="color: #00ff00;">Olá, ${currentUser.username}!</span>
-                    <a href="/auth/logout">Sair</a>
-                `;
-            } else {
-                userStatus.innerHTML = `
-                    <a href="/auth/login">Login</a>
-                    <a href="/auth/register">Cadastro</a>
-                `;
-            }
-        }
-        
         // Carregar produtos
-        async function loadProducts() {
-            try {
-                const response = await fetch('/api/products');
-                const data = await response.json();
-                
-                // Verificar se a resposta tem a nova estrutura ou a antiga
-                if (data.products) {
-                    // Nova estrutura da API
-                    products = data.products;
-                } else if (Array.isArray(data)) {
-                    // Estrutura antiga da API
-                    products = data;
-                } else {
-                    throw new Error('Formato de resposta inválido');
-                }
-                
-                filteredProducts = [...products];
-                displayProducts();
-                updateProductsCounter();
-            } catch (error) {
-                console.error('Erro ao carregar produtos:', error);
-                document.getElementById('productsCount').textContent = 'Erro ao carregar produtos';
-                
-                // Fallback: tentar carregar produtos com estrutura antiga
-                try {
-                    const fallbackResponse = await fetch('/api/products');
-                    const fallbackData = await fallbackResponse.json();
-                    if (Array.isArray(fallbackData)) {
-                        products = fallbackData;
-                        filteredProducts = [...products];
-                        displayProducts();
-                        updateProductsCounter();
-                    }
-                } catch (fallbackError) {
-                    console.error('Erro no fallback:', fallbackError);
-                }
-            }
+        function loadProducts() {
+            filteredProducts = [...products];
+            displayProducts();
+            updateProductsCounter();
         }
         
         // Filtrar produtos por categoria
@@ -1768,12 +1569,166 @@
             
             if (!currentUser) {
                 alert('Faça login para finalizar a compra!');
-                window.location.href = '/auth/login';
+                openLoginModal();
                 return;
             }
             
             // Aqui você implementaria o processo de checkout real
             alert('Funcionalidade de checkout será implementada em breve!');
+        }
+        
+        // SISTEMA DE LOGIN HÍBRIDO
+        
+        // ABRIR MODAL DE LOGIN
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+            showLoginForm();
+        }
+        
+        // FECHAR MODAL
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+        
+        // MOSTRAR FORMULÁRIO DE LOGIN
+        function showLoginForm() {
+            document.getElementById('localLoginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+        }
+        
+        // MOSTRAR FORMULÁRIO DE CADASTRO
+        function showRegisterForm() {
+            document.getElementById('localLoginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+        }
+        
+        // LOGIN LOCAL
+        document.getElementById('localLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // VERIFICAR SE USUÁRIO EXISTE
+            const users = JSON.parse(localStorage.getItem('3dbenchy_users') || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                loginSuccess(user);
+            } else {
+                alert('❌ Email ou senha incorretos!');
+            }
+        });
+        
+        // CADASTRO LOCAL
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            
+            // VERIFICAR SE EMAIL JÁ EXISTE
+            const users = JSON.parse(localStorage.getItem('3dbenchy_users') || '[]');
+            
+            if (users.find(u => u.email === email)) {
+                alert('❌ Este email já está cadastrado!');
+                return;
+            }
+            
+            // CRIAR NOVO USUÁRIO
+            const newUser = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                password: password,
+                type: 'local',
+                createdAt: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('3dbenchy_users', JSON.stringify(users));
+            
+            alert('✅ Conta criada com sucesso!');
+            loginSuccess(newUser);
+        });
+        
+        // LOGIN COM GOOGLE
+        function loginWithGoogle() {
+            // SIMULAÇÃO - EM PRODUÇÃO USAR GOOGLE API
+            const googleUser = {
+                id: 'google_' + Date.now(),
+                name: 'Usuário Google',
+                email: 'usuario@gmail.com',
+                type: 'google',
+                avatar: 'https://via.placeholder.com/50'
+            };
+            
+            alert('🔵 Login com Google simulado!');
+            loginSuccess(googleUser);
+        }
+        
+        // LOGIN COM GITHUB
+        function loginWithGitHub() {
+            // SIMULAÇÃO - EM PRODUÇÃO USAR GITHUB API
+            const githubUser = {
+                id: 'github_' + Date.now(),
+                name: 'Usuário GitHub',
+                email: 'usuario@github.com',
+                type: 'github',
+                avatar: 'https://via.placeholder.com/50'
+            };
+            
+            alert('⚫ Login com GitHub simulado!');
+            loginSuccess(githubUser);
+        }
+        
+        // SUCESSO NO LOGIN
+        function loginSuccess(user) {
+            currentUser = user;
+            localStorage.setItem('3dbenchy_current_user', JSON.stringify(user));
+            
+            // ATUALIZAR INTERFACE
+            updateUserInterface();
+            closeLoginModal();
+            
+            alert(`🎉 Bem-vindo, ${user.name}!`);
+        }
+        
+        // ATUALIZAR INTERFACE DO USUÁRIO
+        function updateUserInterface() {
+            if (currentUser) {
+                // ESCONDER BOTÕES LOGIN/CADASTRO
+                document.querySelector('.login-btn').style.display = 'none';
+                document.querySelector('.register-btn').style.display = 'none';
+                
+                // MOSTRAR INFO DO USUÁRIO
+                const userInfo = document.createElement('div');
+                userInfo.className = 'user-info';
+                userInfo.innerHTML = `
+                    <span class="user-name">👤 ${currentUser.name}</span>
+                    <button class="btn-logout" onclick="logout()">🚪 SAIR</button>
+                `;
+                
+                document.querySelector('.header-actions').insertBefore(userInfo, document.querySelector('.cart-container'));
+            }
+        }
+        
+        // LOGOUT
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('3dbenchy_current_user');
+            
+            // RESTAURAR INTERFACE
+            document.querySelector('.login-btn').style.display = 'inline-block';
+            document.querySelector('.register-btn').style.display = 'inline-block';
+            
+            const userInfo = document.querySelector('.user-info');
+            if (userInfo) {
+                userInfo.remove();
+            }
+            
+            alert('👋 Logout realizado com sucesso!');
         }
         
         // Fechar modal ao clicar fora
@@ -1782,487 +1737,14 @@
                 toggleCart();
             }
         });
+        
+        // FECHAR MODAL CLICANDO FORA
+        document.getElementById('loginModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLoginModal();
+            }
+        });
     </script>
-    
-<!-- MODAL DE LOGIN HÍBRIDO -->
-<div id="loginModal" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2 class="modal-title">🎮 LOGIN 3DBENCHY BROS</h2>
-            <button class="modal-close" onclick="closeLoginModal()">&times;</button>
-        </div>
-        
-        <div class="modal-body">
-            <!-- FORMULÁRIO LOCAL -->
-            <form id="localLoginForm" class="login-form">
-                <div class="form-group">
-                    <label>📧 EMAIL:</label>
-                    <input type="email" id="loginEmail" placeholder="seu@email.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>🔒 SENHA:</label>
-                    <input type="password" id="loginPassword" placeholder="••••••••" required>
-                </div>
-                
-                <div class="form-buttons">
-                    <button type="submit" class="btn-login">🚀 ENTRAR</button>
-                    <button type="button" class="btn-register" onclick="showRegisterForm()">📝 CADASTRO</button>
-                </div>
-            </form>
-            
-            <!-- FORMULÁRIO DE CADASTRO -->
-            <form id="registerForm" class="login-form" style="display: none;">
-                <div class="form-group">
-                    <label>👤 NOME:</label>
-                    <input type="text" id="registerName" placeholder="Seu Nome" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>📧 EMAIL:</label>
-                    <input type="email" id="registerEmail" placeholder="seu@email.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>🔒 SENHA:</label>
-                    <input type="password" id="registerPassword" placeholder="••••••••" required>
-                </div>
-                
-                <div class="form-buttons">
-                    <button type="submit" class="btn-register">📝 CRIAR CONTA</button>
-                    <button type="button" class="btn-login" onclick="showLoginForm()">🔙 VOLTAR</button>
-                </div>
-            </form>
-            
-            <!-- DIVISOR -->
-            <div class="login-divider">
-                <span>──────── OU ────────</span>
-            </div>
-            
-            <!-- LOGIN SOCIAL -->
-            <div class="social-login">
-                <button class="btn-google" onclick="loginWithGoogle()">
-                    🔵 ENTRAR COM GOOGLE
-                </button>
-                
-                <button class="btn-github" onclick="loginWithGitHub()">
-                    ⚫ ENTRAR COM GITHUB
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-    <script>
-// SISTEMA DE LOGIN HÍBRIDO
-let currentUser = null;
-
-// ABRIR MODAL DE LOGIN
-function openLoginModal() {
-    document.getElementById('loginModal').style.display = 'block';
-    showLoginForm();
-}
-
-// FECHAR MODAL
-function closeLoginModal() {
-    document.getElementById('loginModal').style.display = 'none';
-}
-
-// MOSTRAR FORMULÁRIO DE LOGIN
-function showLoginForm() {
-    document.getElementById('localLoginForm').style.display = 'block';
-    document.getElementById('registerForm').style.display = 'none';
-}
-
-// MOSTRAR FORMULÁRIO DE CADASTRO
-function showRegisterForm() {
-    document.getElementById('localLoginForm').style.display = 'none';
-    document.getElementById('registerForm').style.display = 'block';
-}
-
-// LOGIN LOCAL
-document.getElementById('localLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-    
-    // VERIFICAR SE USUÁRIO EXISTE
-    const users = JSON.parse(localStorage.getItem('3dbenchy_users') || '[]');
-    const user = users.find(u => u.email === email && u.password === password);
-    
-    if (user) {
-        loginSuccess(user);
-    } else {
-        alert('❌ Email ou senha incorretos!');
-    }
-});
-
-// CADASTRO LOCAL
-document.getElementById('registerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('registerName').value;
-    const email = document.getElementById('registerEmail').value;
-    const password = document.getElementById('registerPassword').value;
-    
-    // VERIFICAR SE EMAIL JÁ EXISTE
-    const users = JSON.parse(localStorage.getItem('3dbenchy_users') || '[]');
-    
-    if (users.find(u => u.email === email)) {
-        alert('❌ Este email já está cadastrado!');
-        return;
-    }
-    
-    // CRIAR NOVO USUÁRIO
-    const newUser = {
-        id: Date.now(),
-        name: name,
-        email: email,
-        password: password,
-        type: 'local',
-        createdAt: new Date().toISOString()
-    };
-    
-    users.push(newUser);
-    localStorage.setItem('3dbenchy_users', JSON.stringify(users));
-    
-    alert('✅ Conta criada com sucesso!');
-    loginSuccess(newUser);
-});
-
-// LOGIN COM GOOGLE
-function loginWithGoogle() {
-    // SIMULAÇÃO - EM PRODUÇÃO USAR GOOGLE API
-    const googleUser = {
-        id: 'google_' + Date.now(),
-        name: 'Usuário Google',
-        email: 'usuario@gmail.com',
-        type: 'google',
-        avatar: 'https://via.placeholder.com/50'
-    };
-    
-    alert('🔵 Login com Google simulado!' );
-    loginSuccess(googleUser);
-}
-
-// LOGIN COM GITHUB
-function loginWithGitHub() {
-    // SIMULAÇÃO - EM PRODUÇÃO USAR GITHUB API
-    const githubUser = {
-        id: 'github_' + Date.now(),
-        name: 'Usuário GitHub',
-        email: 'usuario@github.com',
-        type: 'github',
-        avatar: 'https://via.placeholder.com/50'
-    };
-    
-    alert('⚫ Login com GitHub simulado!' );
-    loginSuccess(githubUser);
-}
-
-// SUCESSO NO LOGIN
-function loginSuccess(user) {
-    currentUser = user;
-    localStorage.setItem('3dbenchy_current_user', JSON.stringify(user));
-    
-    // ATUALIZAR INTERFACE
-    updateUserInterface();
-    closeLoginModal();
-    
-    alert(`🎉 Bem-vindo, ${user.name}!`);
-}
-
-// ATUALIZAR INTERFACE DO USUÁRIO
-function updateUserInterface() {
-    if (currentUser) {
-        // ESCONDER BOTÕES LOGIN/CADASTRO
-        document.querySelector('.login-btn').style.display = 'none';
-        document.querySelector('.register-btn').style.display = 'none';
-        
-        // MOSTRAR INFO DO USUÁRIO
-        const userInfo = document.createElement('div');
-        userInfo.className = 'user-info';
-        userInfo.innerHTML = `
-            <span class="user-name">👤 ${currentUser.name}</span>
-            <button class="btn-logout" onclick="logout()">🚪 SAIR</button>
-        `;
-        
-        document.querySelector('.header-actions').insertBefore(userInfo, document.querySelector('.cart-container'));
-    }
-}
-
-// LOGOUT
-function logout() {
-    currentUser = null;
-    localStorage.removeItem('3dbenchy_current_user');
-    
-    // RESTAURAR INTERFACE
-    document.querySelector('.login-btn').style.display = 'inline-block';
-    document.querySelector('.register-btn').style.display = 'inline-block';
-    
-    const userInfo = document.querySelector('.user-info');
-    if (userInfo) {
-        userInfo.remove();
-    }
-    
-    alert('👋 Logout realizado com sucesso!');
-}
-
-// VERIFICAR SE JÁ ESTÁ LOGADO
-window.addEventListener('load', function() {
-    const savedUser = localStorage.getItem('3dbenchy_current_user');
-    if (savedUser) {
-        currentUser = JSON.parse(savedUser);
-        updateUserInterface();
-    }
-});
-
-// FECHAR MODAL CLICANDO FORA
-document.getElementById('loginModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeLoginModal();
-    }
-});
-</script>
-    <!-- MODAL DE LOGIN HÍBRIDO -->
-<div id="loginModal" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2 class="modal-title">🎮 LOGIN 3DBENCHY BROS</h2>
-            <button class="modal-close" onclick="closeLoginModal()">&times;</button>
-        </div>
-        
-        <div class="modal-body">
-            <!-- FORMULÁRIO LOCAL -->
-            <form id="localLoginForm" class="login-form">
-                <div class="form-group">
-                    <label>📧 EMAIL:</label>
-                    <input type="email" id="loginEmail" placeholder="seu@email.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>🔒 SENHA:</label>
-                    <input type="password" id="loginPassword" placeholder="••••••••" required>
-                </div>
-                
-                <div class="form-buttons">
-                    <button type="submit" class="btn-login">🚀 ENTRAR</button>
-                    <button type="button" class="btn-register" onclick="showRegisterForm()">📝 CADASTRO</button>
-                </div>
-            </form>
-            
-            <!-- FORMULÁRIO DE CADASTRO -->
-            <form id="registerForm" class="login-form" style="display: none;">
-                <div class="form-group">
-                    <label>👤 NOME:</label>
-                    <input type="text" id="registerName" placeholder="Seu Nome" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>📧 EMAIL:</label>
-                    <input type="email" id="registerEmail" placeholder="seu@email.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>🔒 SENHA:</label>
-                    <input type="password" id="registerPassword" placeholder="••••••••" required>
-                </div>
-                
-                <div class="form-buttons">
-                    <button type="submit" class="btn-register">📝 CRIAR CONTA</button>
-                    <button type="button" class="btn-login" onclick="showLoginForm()">🔙 VOLTAR</button>
-                </div>
-            </form>
-            
-            <!-- DIVISOR -->
-            <div class="login-divider">
-                <span>──────── OU ────────</span>
-            </div>
-            
-            <!-- LOGIN SOCIAL -->
-            <div class="social-login">
-                <button class="btn-google" onclick="loginWithGoogle()">
-                    🔵 ENTRAR COM GOOGLE
-                </button>
-                
-                <button class="btn-github" onclick="loginWithGitHub()">
-                    ⚫ ENTRAR COM GITHUB
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-    <script>
-// SISTEMA DE LOGIN HÍBRIDO
-let currentUser = null;
-
-// ABRIR MODAL DE LOGIN
-function openLoginModal() {
-    document.getElementById('loginModal').style.display = 'block';
-    showLoginForm();
-}
-
-// FECHAR MODAL
-function closeLoginModal() {
-    document.getElementById('loginModal').style.display = 'none';
-}
-
-// MOSTRAR FORMULÁRIO DE LOGIN
-function showLoginForm() {
-    document.getElementById('localLoginForm').style.display = 'block';
-    document.getElementById('registerForm').style.display = 'none';
-}
-
-// MOSTRAR FORMULÁRIO DE CADASTRO
-function showRegisterForm() {
-    document.getElementById('localLoginForm').style.display = 'none';
-    document.getElementById('registerForm').style.display = 'block';
-}
-
-// LOGIN LOCAL
-document.getElementById('localLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-    
-    // VERIFICAR SE USUÁRIO EXISTE
-    const users = JSON.parse(localStorage.getItem('3dbenchy_users') || '[]');
-    const user = users.find(u => u.email === email && u.password === password);
-    
-    if (user) {
-        loginSuccess(user);
-    } else {
-        alert('❌ Email ou senha incorretos!');
-    }
-});
-
-// CADASTRO LOCAL
-document.getElementById('registerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('registerName').value;
-    const email = document.getElementById('registerEmail').value;
-    const password = document.getElementById('registerPassword').value;
-    
-    // VERIFICAR SE EMAIL JÁ EXISTE
-    const users = JSON.parse(localStorage.getItem('3dbenchy_users') || '[]');
-    
-    if (users.find(u => u.email === email)) {
-        alert('❌ Este email já está cadastrado!');
-        return;
-    }
-    
-    // CRIAR NOVO USUÁRIO
-    const newUser = {
-        id: Date.now(),
-        name: name,
-        email: email,
-        password: password,
-        type: 'local',
-        createdAt: new Date().toISOString()
-    };
-    
-    users.push(newUser);
-    localStorage.setItem('3dbenchy_users', JSON.stringify(users));
-    
-    alert('✅ Conta criada com sucesso!');
-    loginSuccess(newUser);
-});
-
-// LOGIN COM GOOGLE
-function loginWithGoogle() {
-    const googleUser = {
-        id: 'google_' + Date.now(),
-        name: 'Usuário Google',
-        email: 'usuario@gmail.com',
-        type: 'google',
-        avatar: 'https://via.placeholder.com/50'
-    };
-    
-    alert('🔵 Login com Google simulado!' );
-    loginSuccess(googleUser);
-}
-
-// LOGIN COM GITHUB
-function loginWithGitHub() {
-    const githubUser = {
-        id: 'github_' + Date.now(),
-        name: 'Usuário GitHub',
-        email: 'usuario@github.com',
-        type: 'github',
-        avatar: 'https://via.placeholder.com/50'
-    };
-    
-    alert('⚫ Login com GitHub simulado!' );
-    loginSuccess(githubUser);
-}
-
-// SUCESSO NO LOGIN
-function loginSuccess(user) {
-    currentUser = user;
-    localStorage.setItem('3dbenchy_current_user', JSON.stringify(user));
-    
-    // ATUALIZAR INTERFACE
-    updateUserInterface();
-    closeLoginModal();
-    
-    alert(`🎉 Bem-vindo, ${user.name}!`);
-}
-
-// ATUALIZAR INTERFACE DO USUÁRIO
-function updateUserInterface() {
-    if (currentUser) {
-        // ESCONDER BOTÕES LOGIN/CADASTRO
-        document.querySelector('.login-btn').style.display = 'none';
-        document.querySelector('.register-btn').style.display = 'none';
-        
-        // MOSTRAR INFO DO USUÁRIO
-        const userInfo = document.createElement('div');
-        userInfo.className = 'user-info';
-        userInfo.innerHTML = `
-            <span class="user-name">👤 ${currentUser.name}</span>
-            <button class="btn-logout" onclick="logout()">🚪 SAIR</button>
-        `;
-        
-        document.querySelector('.header-actions').insertBefore(userInfo, document.querySelector('.cart-container'));
-    }
-}
-
-// LOGOUT
-function logout() {
-    currentUser = null;
-    localStorage.removeItem('3dbenchy_current_user');
-    
-    // RESTAURAR INTERFACE
-    document.querySelector('.login-btn').style.display = 'inline-block';
-    document.querySelector('.register-btn').style.display = 'inline-block';
-    
-    const userInfo = document.querySelector('.user-info');
-    if (userInfo) {
-        userInfo.remove();
-    }
-    
-    alert('👋 Logout realizado com sucesso!');
-}
-
-// VERIFICAR SE JÁ ESTÁ LOGADO
-window.addEventListener('load', function() {
-    const savedUser = localStorage.getItem('3dbenchy_current_user');
-    if (savedUser) {
-        currentUser = JSON.parse(savedUser);
-        updateUserInterface();
-    }
-});
-
-// FECHAR MODAL CLICANDO FORA
-document.getElementById('loginModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeLoginModal();
-    }
-});
-</script>
-
 </body>
 </html>
 
