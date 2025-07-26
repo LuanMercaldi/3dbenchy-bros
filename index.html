@@ -12,7 +12,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px;
+    height: 90px;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     border-bottom: 3px solid #00ffff;
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(255, 0, 255, 0.2);
@@ -38,8 +38,8 @@
 }
 
 .logo-img {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border: 2px solid #ff00ff;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
@@ -47,14 +47,14 @@
 
 .logo-text {
     font-family: 'Press Start 2P', cursive;
-    font-size: 16px;
+    font-size: 18px;
     color: #00ffff;
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
 }
 
 .header-nav {
     display: flex;
-    gap: 30px;
+    gap: 35px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -64,10 +64,10 @@
 
 .nav-link {
     font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
+    font-size: 12px;
     color: #00ff00;
     text-decoration: none;
-    padding: 8px 15px;
+    padding: 10px 18px;
     border: 2px solid transparent;
     border-radius: 6px;
     transition: all 0.3s ease;
@@ -84,13 +84,13 @@
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
 .action-btn {
     font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
-    padding: 8px 12px;
+    font-size: 10px;
+    padding: 10px 16px;
     border: 2px solid;
     border-radius: 6px;
     background: transparent;
@@ -111,16 +111,70 @@
     transform: scale(1.05);
 }
 
-.register-btn {
-    color: #00ffff;
-    border-color: #00ffff;
-    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+/* BOTÕES DE REDES SOCIAIS */
+.social-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.register-btn:hover {
-    background: rgba(0, 255, 255, 0.2);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-    transform: scale(1.05);
+.social-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.social-btn.instagram {
+    color: #E4405F;
+    border-color: #E4405F;
+}
+
+.social-btn.instagram:hover {
+    background: rgba(228, 64, 95, 0.2);
+    box-shadow: 0 0 15px rgba(228, 64, 95, 0.5);
+    transform: scale(1.1);
+}
+
+.social-btn.facebook {
+    color: #1877F2;
+    border-color: #1877F2;
+}
+
+.social-btn.facebook:hover {
+    background: rgba(24, 119, 242, 0.2);
+    box-shadow: 0 0 15px rgba(24, 119, 242, 0.5);
+    transform: scale(1.1);
+}
+
+.social-btn.tiktok {
+    color: #FF0050;
+    border-color: #FF0050;
+}
+
+.social-btn.tiktok:hover {
+    background: rgba(255, 0, 80, 0.2);
+    box-shadow: 0 0 15px rgba(255, 0, 80, 0.5);
+    transform: scale(1.1);
+}
+
+.social-btn.kwai {
+    color: #FF6B35;
+    border-color: #FF6B35;
+}
+
+.social-btn.kwai:hover {
+    background: rgba(255, 107, 53, 0.2);
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+    transform: scale(1.1);
 }
 
 .cart-container {
@@ -128,17 +182,17 @@
 }
 
 .cart-icon-new {
-    font-size: 20px;
+    font-size: 22px;
     color: #00ff00;
     cursor: pointer;
-    padding: 8px;
+    padding: 10px;
     border: 2px solid #00ff00;
     border-radius: 8px;
     background: rgba(0, 255, 0, 0.1);
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
 }
 
 .cart-icon-new:hover {
@@ -149,12 +203,12 @@
 
 .cart-count {
     font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
+    font-size: 10px;
     background: #ff00ff;
     color: #000;
-    padding: 2px 6px;
+    padding: 4px 8px;
     border-radius: 4px;
-    min-width: 16px;
+    min-width: 20px;
     text-align: center;
 }
 
@@ -162,9 +216,9 @@
 .user-info {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
+    font-size: 10px;
 }
 
 .user-name {
@@ -174,8 +228,8 @@
 
 .btn-logout {
     font-family: 'Press Start 2P', cursive;
-    font-size: 7px;
-    padding: 6px 10px;
+    font-size: 9px;
+    padding: 8px 12px;
     border: 2px solid #ff0000;
     border-radius: 6px;
     background: transparent;
@@ -193,7 +247,7 @@
 
 /* AJUSTAR CONTEÚDO PARA NÃO FICAR ATRÁS DO HEADER */
 .container {
-    margin-top: 100px !important;
+    margin-top: 110px !important;
 }
 
 /* RESPONSIVO */
@@ -203,16 +257,26 @@
     }
     
     .logo-text {
-        font-size: 12px;
+        font-size: 14px;
     }
     
     .action-btn {
-        font-size: 6px;
-        padding: 6px 8px;
+        font-size: 8px;
+        padding: 8px 12px;
     }
     
     .header-actions {
-        gap: 10px;
+        gap: 15px;
+    }
+    
+    .social-buttons {
+        gap: 8px;
+    }
+    
+    .social-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
     }
 }
 
@@ -280,7 +344,7 @@
         }
         
         .tagline {
-            font-size: 12px;
+            font-size: 14px;
             color: #ff00ff;
             margin-top: 10px;
             text-shadow: 2px 2px 0px #000;
@@ -308,7 +372,7 @@
             padding: 10px 15px;
             border: 2px solid transparent;
             transition: all 0.3s ease;
-            font-size: 10px;
+            font-size: 12px;
         }
         
         nav a:hover {
@@ -329,13 +393,13 @@
         .section h2 {
             color: #ff00ff;
             margin-bottom: 25px;
-            font-size: 16px;
+            font-size: 18px;
             text-align: center;
             text-shadow: 2px 2px 0px #000;
         }
         
         .intro-text {
-            font-size: 10px;
+            font-size: 12px;
             line-height: 1.8;
             text-align: center;
             margin-bottom: 30px;
@@ -360,7 +424,7 @@
         }
         
         .filters-title {
-            font-size: 12px;
+            font-size: 14px;
             color: #ff00ff;
             margin-bottom: 20px;
             text-shadow: 2px 2px 0px #000;
@@ -377,9 +441,9 @@
             background: rgba(0, 0, 0, 0.7);
             border: 2px solid #00ffff;
             color: #00ffff;
-            padding: 12px 20px;
+            padding: 14px 22px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 8px;
+            font-size: 10px;
             cursor: pointer;
             border-radius: 8px;
             transition: all 0.3s ease;
@@ -431,7 +495,7 @@
         }
         
         .products-counter span {
-            font-size: 10px;
+            font-size: 12px;
             color: #00ff00;
             text-shadow: 1px 1px 0px #000;
         }
@@ -490,13 +554,13 @@
         }
         
         .product-title {
-            font-size: 10px;
+            font-size: 12px;
             color: #00ff00;
             margin-bottom: 10px;
         }
         
         .product-price {
-            font-size: 12px;
+            font-size: 14px;
             color: #ffff00;
             margin-bottom: 15px;
             text-shadow: 1px 1px 0px #000;
@@ -506,9 +570,9 @@
             background: linear-gradient(45deg, #ff00ff, #00ffff);
             color: #000;
             border: none;
-            padding: 10px 15px;
+            padding: 12px 18px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 8px;
+            font-size: 10px;
             cursor: pointer;
             border-radius: 5px;
             transition: all 0.3s ease;
@@ -559,7 +623,7 @@
         }
         
         .gallery-title {
-            font-size: 8px;
+            font-size: 10px;
             color: #00ff00;
         }
         
@@ -581,19 +645,19 @@
         }
         
         .blog-title {
-            font-size: 10px;
+            font-size: 12px;
             color: #ffff00;
             margin-bottom: 10px;
         }
         
         .blog-date {
-            font-size: 8px;
+            font-size: 10px;
             color: #00ffff;
             margin-bottom: 15px;
         }
         
         .blog-excerpt {
-            font-size: 8px;
+            font-size: 10px;
             line-height: 1.6;
             color: #ccc;
         }
@@ -613,13 +677,13 @@
         }
         
         .contact-section h3 {
-            font-size: 12px;
+            font-size: 14px;
             color: #ff00ff;
             margin-bottom: 15px;
         }
         
         .contact-section p {
-            font-size: 8px;
+            font-size: 10px;
             line-height: 1.8;
             margin-bottom: 8px;
         }
@@ -656,7 +720,7 @@
         }
         
         .cart-title {
-            font-size: 14px;
+            font-size: 16px;
             color: #ff00ff;
         }
         
@@ -664,9 +728,9 @@
             background: #ff0000;
             color: #fff;
             border: none;
-            padding: 8px 12px;
+            padding: 10px 14px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 8px;
+            font-size: 10px;
             cursor: pointer;
             border-radius: 3px;
         }
@@ -691,13 +755,13 @@
         }
         
         .cart-item-name {
-            font-size: 9px;
+            font-size: 11px;
             color: #00ff00;
             margin-bottom: 5px;
         }
         
         .cart-item-price {
-            font-size: 8px;
+            font-size: 10px;
             color: #ffff00;
         }
         
@@ -712,18 +776,18 @@
             background: #ff00ff;
             color: #fff;
             border: none;
-            width: 25px;
-            height: 25px;
+            width: 28px;
+            height: 28px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 8px;
+            font-size: 10px;
             cursor: pointer;
             border-radius: 3px;
         }
         
         .quantity {
-            font-size: 10px;
+            font-size: 12px;
             color: #00ffff;
-            min-width: 20px;
+            min-width: 25px;
             text-align: center;
         }
         
@@ -731,9 +795,9 @@
             background: #ff0000;
             color: #fff;
             border: none;
-            padding: 5px 8px;
+            padding: 6px 10px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 7px;
+            font-size: 8px;
             cursor: pointer;
             border-radius: 3px;
         }
@@ -748,7 +812,7 @@
         }
         
         .total-amount {
-            font-size: 14px;
+            font-size: 16px;
             color: #ffff00;
         }
         
@@ -756,9 +820,9 @@
             background: linear-gradient(45deg, #00ff00, #00ffff);
             color: #000;
             border: none;
-            padding: 15px 30px;
+            padding: 18px 35px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 10px;
+            font-size: 12px;
             cursor: pointer;
             border-radius: 5px;
             width: 100%;
@@ -772,11 +836,11 @@
         .empty-cart {
             text-align: center;
             color: #00ffff;
-            font-size: 10px;
+            font-size: 12px;
             padding: 40px;
         }
 
-/* MODAL DE LOGIN */
+/* MODAL DE LOGIN MELHORADO */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -800,7 +864,7 @@
     border-radius: 15px;
     box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(255, 0, 255, 0.3);
     width: 90%;
-    max-width: 400px;
+    max-width: 450px;
     animation: slideIn 0.3s ease;
 }
 
@@ -808,13 +872,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 25px;
     border-bottom: 2px solid #ff00ff;
 }
 
 .modal-title {
     font-family: 'Press Start 2P', cursive;
-    font-size: 12px;
+    font-size: 16px;
     color: #00ffff;
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
     margin: 0;
@@ -824,9 +888,9 @@
     background: none;
     border: 2px solid #ff00ff;
     color: #ff00ff;
-    font-size: 20px;
-    width: 30px;
-    height: 30px;
+    font-size: 24px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -838,35 +902,35 @@
 }
 
 .modal-body {
-    padding: 20px;
+    padding: 25px;
 }
 
 .login-form {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
+    font-size: 12px;
     color: #00ff00;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
 }
 
 .form-group input {
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     background: rgba(0, 0, 0, 0.5);
     border: 2px solid #00ffff;
     border-radius: 8px;
     color: #fff;
     font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
+    font-size: 12px;
     box-sizing: border-box;
 }
 
@@ -878,26 +942,22 @@
 
 .form-buttons {
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 15px;
+    margin-top: 25px;
 }
 
-.btn-login, .btn-register {
+.btn-login {
     flex: 1;
-    padding: 12px;
+    padding: 15px;
     font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
-    border: 2px solid;
+    font-size: 12px;
+    border: 2px solid #00ffff;
     border-radius: 8px;
     background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
-}
-
-.btn-login {
     color: #00ffff;
-    border-color: #00ffff;
 }
 
 .btn-login:hover {
@@ -905,40 +965,34 @@
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
 }
 
-.btn-register {
-    color: #00ff00;
-    border-color: #00ff00;
-}
-
-.btn-register:hover {
-    background: rgba(0, 255, 0, 0.2);
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-}
-
 .login-divider {
     text-align: center;
-    margin: 20px 0;
+    margin: 25px 0;
     color: #888;
     font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .social-login {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
-.btn-google, .btn-github {
+.btn-social {
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
+    font-size: 12px;
     border: 2px solid;
     border-radius: 8px;
     background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .btn-google {
@@ -958,6 +1012,27 @@
 }
 
 .btn-github:hover {
+    background: #f0f0f0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-facebook {
+    color: #1877F2;
+    border-color: #1877F2;
+}
+
+.btn-facebook:hover {
+    background: rgba(24, 119, 242, 0.2);
+    box-shadow: 0 0 15px rgba(24, 119, 242, 0.5);
+}
+
+.btn-apple {
+    color: #000;
+    border-color: #000;
+    background: #fff;
+}
+
+.btn-apple:hover {
     background: #f0f0f0;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
@@ -996,7 +1071,7 @@
             }
             
             .filters-title {
-                font-size: 10px;
+                font-size: 12px;
                 margin-bottom: 15px;
             }
             
@@ -1006,8 +1081,8 @@
             }
             
             .filter-btn {
-                padding: 10px 15px;
-                font-size: 7px;
+                padding: 12px 18px;
+                font-size: 9px;
                 width: 100%;
                 max-width: 300px;
                 margin: 0 auto;
@@ -1019,7 +1094,30 @@
             }
             
             .products-counter span {
-                font-size: 8px;
+                font-size: 10px;
+            }
+            
+            /* Modal responsivo */
+            .modal-content {
+                max-width: 95%;
+            }
+            
+            .modal-title {
+                font-size: 12px;
+            }
+            
+            .form-group label {
+                font-size: 10px;
+            }
+            
+            .form-group input {
+                font-size: 10px;
+                padding: 12px;
+            }
+            
+            .btn-login, .btn-social {
+                font-size: 10px;
+                padding: 12px;
             }
         }
     </style>
@@ -1046,7 +1144,15 @@
             <!-- Ações do Usuário -->
             <div class="header-actions">
                 <button class="action-btn login-btn" onclick="openLoginModal()">LOGIN</button>
-                <button class="action-btn register-btn" onclick="openLoginModal()">CADASTRO</button>
+                
+                <!-- Botões de Redes Sociais -->
+                <div class="social-buttons">
+                    <a href="https://instagram.com/3dbenchybros" target="_blank" class="social-btn instagram" title="Instagram">📷</a>
+                    <a href="https://facebook.com/3dbenchybros" target="_blank" class="social-btn facebook" title="Facebook">📘</a>
+                    <a href="https://tiktok.com/@3dbenchybros" target="_blank" class="social-btn tiktok" title="TikTok">🎵</a>
+                    <a href="https://kwai.com/@3dbenchybros" target="_blank" class="social-btn kwai" title="Kwai">🎬</a>
+                </div>
+                
                 <div class="cart-container">
                     <div class="cart-icon-new" onclick="toggleCart()">
                         🛒 <span class="cart-count" id="cartCount">0</span>
@@ -1059,7 +1165,7 @@
     <div class="container">
         <header>
             <img src="logo.png" alt="3DBenchy Bros. Logo" class="logo">
-            <h1 style="font-size: 24px; color: #00ffff; text-shadow: 3px 3px 0px #000;">3DBenchy Bros.</h1>
+            <h1 style="font-size: 28px; color: #00ffff; text-shadow: 3px 3px 0px #000;">3DBenchy Bros.</h1>
             <p class="tagline">Impressão 3D com Estilo Retro • Colecionáveis Únicos • Qualidade Pixelizada</p>
         </header>
         
@@ -1228,7 +1334,7 @@
         </div>
     </div>
     
-    <!-- MODAL DE LOGIN HÍBRIDO -->
+    <!-- MODAL DE LOGIN MELHORADO -->
     <div id="loginModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -1237,7 +1343,7 @@
             </div>
             
             <div class="modal-body">
-                <!-- FORMULÁRIO LOCAL -->
+                <!-- FORMULÁRIO DE LOGIN -->
                 <form id="localLoginForm" class="login-form">
                     <div class="form-group">
                         <label>📧 EMAIL:</label>
@@ -1251,45 +1357,29 @@
                     
                     <div class="form-buttons">
                         <button type="submit" class="btn-login">🚀 ENTRAR</button>
-                        <button type="button" class="btn-register" onclick="showRegisterForm()">📝 CADASTRO</button>
-                    </div>
-                </form>
-                
-                <!-- FORMULÁRIO DE CADASTRO -->
-                <form id="registerForm" class="login-form" style="display: none;">
-                    <div class="form-group">
-                        <label>👤 NOME:</label>
-                        <input type="text" id="registerName" placeholder="Seu Nome" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>📧 EMAIL:</label>
-                        <input type="email" id="registerEmail" placeholder="seu@email.com" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>🔒 SENHA:</label>
-                        <input type="password" id="registerPassword" placeholder="••••••••" required>
-                    </div>
-                    
-                    <div class="form-buttons">
-                        <button type="submit" class="btn-register">📝 CRIAR CONTA</button>
-                        <button type="button" class="btn-login" onclick="showLoginForm()">🔙 VOLTAR</button>
                     </div>
                 </form>
                 
                 <!-- DIVISOR -->
                 <div class="login-divider">
-                    <span>──────── OU ────────</span>
+                    <span>──────── OU ENTRE COM ────────</span>
                 </div>
                 
-                <!-- LOGIN SOCIAL -->
+                <!-- LOGIN SOCIAL EXPANDIDO -->
                 <div class="social-login">
-                    <button class="btn-google" onclick="loginWithGoogle()">
+                    <button class="btn-social btn-google" onclick="loginWithGoogle()">
                         🔵 ENTRAR COM GOOGLE
                     </button>
                     
-                    <button class="btn-github" onclick="loginWithGitHub()">
+                    <button class="btn-social btn-facebook" onclick="loginWithFacebook()">
+                        📘 ENTRAR COM FACEBOOK
+                    </button>
+                    
+                    <button class="btn-social btn-apple" onclick="loginWithApple()">
+                        🍎 ENTRAR COM APPLE
+                    </button>
+                    
+                    <button class="btn-social btn-github" onclick="loginWithGitHub()">
                         ⚫ ENTRAR COM GITHUB
                     </button>
                 </div>
@@ -1397,10 +1487,10 @@
             
             if (filteredProducts.length === 0) {
                 grid.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #00ffff; font-size: 10px;">
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #00ffff; font-size: 12px;">
                         <div style="font-size: 24px; margin-bottom: 15px;">🔍</div>
                         <div>Nenhum produto encontrado nesta coleção.</div>
-                        <div style="margin-top: 10px; font-size: 8px; color: #ff00ff;">
+                        <div style="margin-top: 10px; font-size: 10px; color: #ff00ff;">
                             Experimente selecionar outra coleção ou visualizar todos os produtos.
                         </div>
                     </div>
@@ -1415,7 +1505,7 @@
                 productCard.innerHTML = `
                     <div class="product-image">${getProductIcon(product.category)}</div>
                     <h3 class="product-title">${product.name}</h3>
-                    <div class="product-category" style="font-size: 7px; color: #ff00ff; margin-bottom: 8px;">
+                    <div class="product-category" style="font-size: 9px; color: #ff00ff; margin-bottom: 8px;">
                         ${getCategoryDisplayName(product.category)}
                     </div>
                     <p class="product-price">R$ ${product.price.toFixed(2)}</p>
@@ -1577,29 +1667,16 @@
             alert('Funcionalidade de checkout será implementada em breve!');
         }
         
-        // SISTEMA DE LOGIN HÍBRIDO
+        // SISTEMA DE LOGIN MELHORADO
         
         // ABRIR MODAL DE LOGIN
         function openLoginModal() {
             document.getElementById('loginModal').style.display = 'block';
-            showLoginForm();
         }
         
         // FECHAR MODAL
         function closeLoginModal() {
             document.getElementById('loginModal').style.display = 'none';
-        }
-        
-        // MOSTRAR FORMULÁRIO DE LOGIN
-        function showLoginForm() {
-            document.getElementById('localLoginForm').style.display = 'block';
-            document.getElementById('registerForm').style.display = 'none';
-        }
-        
-        // MOSTRAR FORMULÁRIO DE CADASTRO
-        function showRegisterForm() {
-            document.getElementById('localLoginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'block';
         }
         
         // LOGIN LOCAL
@@ -1616,46 +1693,26 @@
             if (user) {
                 loginSuccess(user);
             } else {
-                alert('❌ Email ou senha incorretos!');
+                // Se não existe, criar automaticamente (cadastro automático)
+                const newUser = {
+                    id: Date.now(),
+                    name: email.split('@')[0],
+                    email: email,
+                    password: password,
+                    type: 'local',
+                    createdAt: new Date().toISOString()
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('3dbenchy_users', JSON.stringify(users));
+                
+                alert('✅ Conta criada automaticamente!');
+                loginSuccess(newUser);
             }
-        });
-        
-        // CADASTRO LOCAL
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('registerName').value;
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
-            
-            // VERIFICAR SE EMAIL JÁ EXISTE
-            const users = JSON.parse(localStorage.getItem('3dbenchy_users') || '[]');
-            
-            if (users.find(u => u.email === email)) {
-                alert('❌ Este email já está cadastrado!');
-                return;
-            }
-            
-            // CRIAR NOVO USUÁRIO
-            const newUser = {
-                id: Date.now(),
-                name: name,
-                email: email,
-                password: password,
-                type: 'local',
-                createdAt: new Date().toISOString()
-            };
-            
-            users.push(newUser);
-            localStorage.setItem('3dbenchy_users', JSON.stringify(users));
-            
-            alert('✅ Conta criada com sucesso!');
-            loginSuccess(newUser);
         });
         
         // LOGIN COM GOOGLE
         function loginWithGoogle() {
-            // SIMULAÇÃO - EM PRODUÇÃO USAR GOOGLE API
             const googleUser = {
                 id: 'google_' + Date.now(),
                 name: 'Usuário Google',
@@ -1668,9 +1725,36 @@
             loginSuccess(googleUser);
         }
         
+        // LOGIN COM FACEBOOK
+        function loginWithFacebook() {
+            const facebookUser = {
+                id: 'facebook_' + Date.now(),
+                name: 'Usuário Facebook',
+                email: 'usuario@facebook.com',
+                type: 'facebook',
+                avatar: 'https://via.placeholder.com/50'
+            };
+            
+            alert('📘 Login com Facebook simulado!');
+            loginSuccess(facebookUser);
+        }
+        
+        // LOGIN COM APPLE
+        function loginWithApple() {
+            const appleUser = {
+                id: 'apple_' + Date.now(),
+                name: 'Usuário Apple',
+                email: 'usuario@icloud.com',
+                type: 'apple',
+                avatar: 'https://via.placeholder.com/50'
+            };
+            
+            alert('🍎 Login com Apple simulado!');
+            loginSuccess(appleUser);
+        }
+        
         // LOGIN COM GITHUB
         function loginWithGitHub() {
-            // SIMULAÇÃO - EM PRODUÇÃO USAR GITHUB API
             const githubUser = {
                 id: 'github_' + Date.now(),
                 name: 'Usuário GitHub',
@@ -1698,9 +1782,8 @@
         // ATUALIZAR INTERFACE DO USUÁRIO
         function updateUserInterface() {
             if (currentUser) {
-                // ESCONDER BOTÕES LOGIN/CADASTRO
+                // ESCONDER BOTÃO LOGIN
                 document.querySelector('.login-btn').style.display = 'none';
-                document.querySelector('.register-btn').style.display = 'none';
                 
                 // MOSTRAR INFO DO USUÁRIO
                 const userInfo = document.createElement('div');
@@ -1710,7 +1793,7 @@
                     <button class="btn-logout" onclick="logout()">🚪 SAIR</button>
                 `;
                 
-                document.querySelector('.header-actions').insertBefore(userInfo, document.querySelector('.cart-container'));
+                document.querySelector('.header-actions').insertBefore(userInfo, document.querySelector('.social-buttons'));
             }
         }
         
@@ -1721,7 +1804,6 @@
             
             // RESTAURAR INTERFACE
             document.querySelector('.login-btn').style.display = 'inline-block';
-            document.querySelector('.register-btn').style.display = 'inline-block';
             
             const userInfo = document.querySelector('.user-info');
             if (userInfo) {
@@ -1747,4 +1829,3 @@
     </script>
 </body>
 </html>
-
