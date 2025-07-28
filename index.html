@@ -492,6 +492,234 @@
             text-align: center;
             margin-bottom: 15px;
         }
+
+        /* ABAS DO MODAL */
+        .modal-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #222;
+            color: #ccc;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: #333;
+            color: #00ffff;
+            border-bottom-color: #00ffff;
+        }
+
+        .tab-button:hover {
+            background: #333;
+            color: #ff00ff;
+        }
+
+        /* CONTEÚDO DAS ABAS */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* FORMULÁRIOS DE AUTENTICAÇÃO */
+        .auth-form {
+            margin-bottom: 30px;
+        }
+
+        .auth-form h3 {
+            color: #00ffff;
+            font-size: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #00ff00;
+            font-size: 8px;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 2px solid #555;
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: #666;
+        }
+
+        .password-requirements {
+            margin-top: 8px;
+        }
+
+        .password-requirements small {
+            display: block;
+            color: #666;
+            font-size: 6px;
+            margin-bottom: 2px;
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .auth-button.primary {
+            background: linear-gradient(45deg, #00ff00, #00cc00);
+            color: #000;
+        }
+
+        .auth-button.primary:hover {
+            background: linear-gradient(45deg, #00cc00, #009900);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            transform: scale(1.02);
+        }
+
+        .forgot-link {
+            display: block;
+            text-align: center;
+            color: #ff00ff;
+            font-size: 6px;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        .forgot-link:hover {
+            color: #00ffff;
+        }
+
+        /* DIVIDER */
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            color: #666;
+            font-size: 8px;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #333;
+            z-index: 1;
+        }
+
+        .divider::after {
+            content: 'OU';
+            background: #111;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* BOTÕES OAUTH */
+        .oauth-button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 2px solid;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .oauth-button.google {
+            background: #4285f4;
+            color: #fff;
+            border-color: #4285f4;
+        }
+
+        .oauth-button.google:hover {
+            background: #3367d6;
+            box-shadow: 0 0 15px rgba(66, 133, 244, 0.5);
+        }
+
+        .oauth-button.facebook {
+            background: #1877f2;
+            color: #fff;
+            border-color: #1877f2;
+        }
+
+        .oauth-button.facebook:hover {
+            background: #166fe5;
+            box-shadow: 0 0 15px rgba(24, 119, 242, 0.5);
+        }
+
+        .oauth-button.apple {
+            background: #000;
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .oauth-button.apple:hover {
+            background: #333;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* MENSAGENS DE AUTENTICAÇÃO */
+        .auth-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        .auth-message.success {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #00ff00;
+            color: #00ff00;
+        }
+
+        .auth-message.error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid #ff0000;
+            color: #ff0000;
+        }
     </style>
 </head>
 <body>
@@ -596,41 +824,132 @@
         </section>
     </div>
 
-    <!-- MODAL LOGIN -->
+    <!-- MODAL LOGIN/CADASTRO -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal()">&times;</button>
-            <h2>🎮 LOGIN 3DBENCHY BROS</h2>
-            <div style="text-align: center;">
-                <p style="margin-bottom: 20px; font-size: 8px; color: #ccc;">
-                    Entre com sua conta GitHub para acessar todas as funcionalidades:
-                </p>
+            
+            <!-- ABAS -->
+            <div class="modal-tabs">
+                <button class="tab-button active" onclick="switchTab('login')">🔑 LOGIN</button>
+                <button class="tab-button" onclick="switchTab('register')">📝 CADASTRO</button>
+            </div>
+            
+            <!-- CONTEÚDO ABA LOGIN -->
+            <div id="loginTab" class="tab-content active">
+                <h2>🎮 LOGIN 3DBENCHY BROS</h2>
                 
-                <!-- GitHub como provedor principal -->
-                <button onclick="loginWithProvider('github')" class="github-login-primary">
-                    ⚫ ENTRAR COM GITHUB (RECOMENDADO)
-                </button>
+                <!-- FORMULÁRIO LOGIN TRADICIONAL -->
+                <div class="auth-form">
+                    <h3>🔐 Login com Email</h3>
+                    <form id="loginForm" onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="loginEmail">📧 Email:</label>
+                            <input type="email" id="loginEmail" required placeholder="seu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">🔒 Senha:</label>
+                            <input type="password" id="loginPassword" required placeholder="Sua senha">
+                        </div>
+                        <button type="submit" class="auth-button primary">🚀 ENTRAR</button>
+                        <a href="#" onclick="showForgotPassword()" class="forgot-link">Esqueci minha senha</a>
+                    </form>
+                </div>
                 
-                <!-- Outros provedores -->
-                <div class="other-providers">
-                    <h3>Outras opções:</h3>
-                    <button onclick="loginWithProvider('google')" style="width: 100%; margin-bottom: 10px; padding: 15px; background: #4285f4; color: #fff; border: 2px solid #4285f4; border-radius: 8px; cursor: pointer;">
-                        🔵 ENTRAR COM GOOGLE
+                <div class="divider">OU</div>
+                
+                <!-- OAUTH PROVIDERS -->
+                <div class="oauth-providers">
+                    <h3>🌐 Login Social</h3>
+                    
+                    <!-- GitHub como provedor principal -->
+                    <button onclick="loginWithProvider('github')" class="github-login-primary">
+                        ⚫ ENTRAR COM GITHUB (RECOMENDADO)
                     </button>
-                    <button onclick="loginWithProvider('facebook')" style="width: 100%; margin-bottom: 10px; padding: 15px; background: #1877f2; color: #fff; border: 2px solid #1877f2; border-radius: 8px; cursor: pointer;">
-                        📘 ENTRAR COM FACEBOOK
-                    </button>
-                    <button onclick="loginWithProvider('apple')" style="width: 100%; padding: 15px; background: #000; color: #fff; border: 2px solid #fff; border-radius: 8px; cursor: pointer;">
-                        🍎 ENTRAR COM APPLE
-                    </button>
+                    
+                    <!-- Outros provedores -->
+                    <div class="other-providers">
+                        <button onclick="loginWithProvider('google')" class="oauth-button google">
+                            🔵 ENTRAR COM GOOGLE
+                        </button>
+                        <button onclick="loginWithProvider('facebook')" class="oauth-button facebook">
+                            📘 ENTRAR COM FACEBOOK
+                        </button>
+                        <button onclick="loginWithProvider('apple')" class="oauth-button apple">
+                            🍎 ENTRAR COM APPLE
+                        </button>
+                    </div>
                 </div>
             </div>
+            
+            <!-- CONTEÚDO ABA CADASTRO -->
+            <div id="registerTab" class="tab-content">
+                <h2>📝 CADASTRO 3DBENCHY BROS</h2>
+                
+                <!-- FORMULÁRIO CADASTRO -->
+                <div class="auth-form">
+                    <h3>🆕 Criar Conta</h3>
+                    <form id="registerForm" onsubmit="handleRegister(event)">
+                        <div class="form-group">
+                            <label for="registerName">👤 Nome Completo:</label>
+                            <input type="text" id="registerName" required placeholder="Seu nome completo">
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">📧 Email:</label>
+                            <input type="email" id="registerEmail" required placeholder="seu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">🔒 Senha:</label>
+                            <input type="password" id="registerPassword" required placeholder="Mínimo 6 caracteres">
+                            <div class="password-requirements">
+                                <small>• Mínimo 6 caracteres</small>
+                                <small>• Pelo menos 1 letra</small>
+                                <small>• Pelo menos 1 número</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">🔒 Confirmar Senha:</label>
+                            <input type="password" id="confirmPassword" required placeholder="Digite a senha novamente">
+                        </div>
+                        <button type="submit" class="auth-button primary">🎯 CRIAR CONTA</button>
+                    </form>
+                </div>
+                
+                <div class="divider">OU</div>
+                
+                <!-- OAUTH PROVIDERS PARA CADASTRO -->
+                <div class="oauth-providers">
+                    <h3>🌐 Cadastro Rápido</h3>
+                    <p style="font-size: 8px; color: #ccc; margin-bottom: 15px;">
+                        Crie sua conta rapidamente usando uma rede social:
+                    </p>
+                    
+                    <button onclick="loginWithProvider('github')" class="github-login-primary">
+                        ⚫ CADASTRAR COM GITHUB
+                    </button>
+                    
+                    <div class="other-providers">
+                        <button onclick="loginWithProvider('google')" class="oauth-button google">
+                            🔵 CADASTRAR COM GOOGLE
+                        </button>
+                        <button onclick="loginWithProvider('facebook')" class="oauth-button facebook">
+                            📘 CADASTRAR COM FACEBOOK
+                        </button>
+                        <button onclick="loginWithProvider('apple')" class="oauth-button apple">
+                            🍎 CADASTRAR COM APPLE
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MENSAGENS DE ERRO/SUCESSO -->
+            <div id="authMessage" class="auth-message"></div>
         </div>
     </div>
 
     <script>
         // Configuração da API - Integração com backend Manus
-        const API_BASE_URL = 'https://8xhpiqcl9jdv.manus.space/api';
+        const API_BASE_URL = 'https://0vhlizck97vl.manus.space/api';
         
         // Estado da aplicação
         let currentUser = null;
@@ -1013,6 +1332,213 @@
         if (urlParams.get('login') === 'success') {
             alert('Login realizado com sucesso via GitHub!');
             checkAuthStatus();
+        }
+
+        // ============================================================================
+        // FUNÇÕES PARA ABAS E AUTENTICAÇÃO
+        // ============================================================================
+
+        // Alternar entre abas do modal
+        function switchTab(tabName) {
+            // Remover classe active de todas as abas
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Ativar aba selecionada
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+
+            // Limpar mensagens
+            hideAuthMessage();
+        }
+
+        // Mostrar mensagem de autenticação
+        function showAuthMessage(message, type = 'error') {
+            const messageEl = document.getElementById('authMessage');
+            messageEl.textContent = message;
+            messageEl.className = `auth-message ${type}`;
+            messageEl.style.display = 'block';
+        }
+
+        // Esconder mensagem de autenticação
+        function hideAuthMessage() {
+            const messageEl = document.getElementById('authMessage');
+            messageEl.style.display = 'none';
+        }
+
+        // Validar email
+        function validateEmail(email) {
+            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return re.test(email);
+        }
+
+        // Validar senha
+        function validatePassword(password) {
+            if (password.length < 6) {
+                return { valid: false, message: 'Senha deve ter pelo menos 6 caracteres' };
+            }
+            if (!/[A-Za-z]/.test(password)) {
+                return { valid: false, message: 'Senha deve conter pelo menos uma letra' };
+            }
+            if (!/[0-9]/.test(password)) {
+                return { valid: false, message: 'Senha deve conter pelo menos um número' };
+            }
+            return { valid: true, message: 'Senha válida' };
+        }
+
+        // Manipular login tradicional
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            // Validações básicas
+            if (!email || !password) {
+                showAuthMessage('Por favor, preencha todos os campos');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                showAuthMessage('Por favor, insira um email válido');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showAuthMessage('Login realizado com sucesso!', 'success');
+                    currentUser = data.user;
+                    updateUIAfterLogin();
+                    setTimeout(() => {
+                        closeModal();
+                    }, 1500);
+                } else {
+                    showAuthMessage(data.error || 'Erro ao fazer login');
+                }
+            } catch (error) {
+                showAuthMessage('Erro de conexão. Tente novamente.');
+                console.error('Erro no login:', error);
+            }
+        }
+
+        // Manipular cadastro
+        async function handleRegister(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('registerName').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validações básicas
+            if (!name || !email || !password || !confirmPassword) {
+                showAuthMessage('Por favor, preencha todos os campos');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                showAuthMessage('Por favor, insira um email válido');
+                return;
+            }
+
+            const passwordValidation = validatePassword(password);
+            if (!passwordValidation.valid) {
+                showAuthMessage(passwordValidation.message);
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showAuthMessage('As senhas não coincidem');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showAuthMessage('Conta criada com sucesso! Você já está logado.', 'success');
+                    currentUser = data.user;
+                    updateUIAfterLogin();
+                    setTimeout(() => {
+                        closeModal();
+                    }, 2000);
+                } else {
+                    showAuthMessage(data.error || 'Erro ao criar conta');
+                }
+            } catch (error) {
+                showAuthMessage('Erro de conexão. Tente novamente.');
+                console.error('Erro no cadastro:', error);
+            }
+        }
+
+        // Atualizar UI após login
+        function updateUIAfterLogin() {
+            // Atualizar botão de login
+            const loginButton = document.querySelector('.nav-link[onclick="openModal()"]');
+            if (loginButton && currentUser) {
+                loginButton.innerHTML = `👤 ${currentUser.name}`;
+                loginButton.onclick = () => showUserMenu();
+            }
+
+            // Recarregar carrinho
+            loadCart();
+            
+            // Atualizar seção atual se necessário
+            if (currentSection === 'cart') {
+                showSection('cart');
+            }
+        }
+
+        // Mostrar menu do usuário
+        function showUserMenu() {
+            // TODO: Implementar menu dropdown com opções:
+            // - Minha conta
+            // - Meus pedidos
+            // - Alterar senha
+            // - Logout
+            alert('Menu do usuário em desenvolvimento');
+        }
+
+        // Mostrar recuperação de senha
+        function showForgotPassword() {
+            const email = document.getElementById('loginEmail').value.trim();
+            
+            if (!email) {
+                showAuthMessage('Digite seu email primeiro');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                showAuthMessage('Digite um email válido');
+                return;
+            }
+
+            // TODO: Implementar recuperação de senha
+            showAuthMessage('Funcionalidade de recuperação em desenvolvimento', 'success');
         }
 
         // Fechar modal clicando fora
