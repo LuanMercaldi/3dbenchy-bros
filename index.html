@@ -862,7 +862,7 @@
                     </div>
                     <div class="form-group">
                         <label for="loginPassword">Senha</label>
-                        <input type="password" id="loginPassword" required placeholder="Sua senha">
+                        <input type="password" id="loginPassword" autocomplete="current-password" required placeholder="Sua senha">
                     </div>
                     <button type="submit" class="auth-button primary">Fazer login</button>
                     <a href="#" onclick="showForgotPassword()" class="forgot-link">Esqueceu a senha?</a>
@@ -887,11 +887,11 @@
                     </div>
                     <div class="form-group">
                         <label for="registerPassword">Senha</label>
-                        <input type="password" id="registerPassword" required placeholder="Mínimo 6 caracteres">
+                        <input type="password" id="registerPassword" autocomplete="new-password" required placeholder="Mínimo 6 caracteres">
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">Confirmar senha</label>
-                        <input type="password" id="confirmPassword" required placeholder="Digite a senha novamente">
+                        <input type="password" id="confirmPassword" autocomplete="new-password" required placeholder="Digite a senha novamente">
                     </div>
                     <button type="submit" class="auth-button primary">Criar conta</button>
                 </form>
@@ -1086,22 +1086,61 @@
         }
 
         function searchProducts() {
-            const query = document.getElementById('searchInput').value;
-            const url = query ? `${API_BASE_URL}/products?search=${encodeURIComponent(query)}` : `${API_BASE_URL}/products`;
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
             
-            fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                displayProducts(data.products, 'productsGrid');
-            })
-            .catch(error => {
-                // Fallback para busca local
-                const filtered = products.filter(p => 
-                    p.name.toLowerCase().includes(query.toLowerCase()) ||
-                    p.description.toLowerCase().includes(query.toLowerCase())
-                );
-                displayProducts(filtered, 'productsGrid');
-            });
+            // Produtos estáticos para busca
+            const staticProducts = [
+                {
+                    id: 1,
+                    name: "Apache AH-64 Helicopter",
+                    price: 89.90,
+                    description: "Modelo detalhado do helicóptero de combate Apache AH-64. Perfeito para colecionadores e entusiastas de aviação militar."
+                },
+                {
+                    id: 2,
+                    name: "F-22 Raptor Fighter Jet",
+                    price: 129.90,
+                    description: "Caça stealth F-22 Raptor em escala detalhada. Inclui detalhes internos e externos precisos."
+                },
+                {
+                    id: 3,
+                    name: "M1A2 Abrams Tank",
+                    price: 149.90,
+                    description: "Tanque de guerra M1A2 Abrams com detalhes realistas. Inclui torre móvel e canhão articulado."
+                },
+                {
+                    id: 4,
+                    name: "USS Enterprise Aircraft Carrier",
+                    price: 199.90,
+                    description: "Porta-aviões USS Enterprise em escala reduzida. Deck de voo detalhado com marcações realistas."
+                },
+                {
+                    id: 5,
+                    name: "Millennium Falcon",
+                    price: 179.90,
+                    description: "Nave espacial icônica de Star Wars com detalhes internos. Perfeita para fãs da saga."
+                },
+                {
+                    id: 6,
+                    name: "Lamborghini Aventador",
+                    price: 99.90,
+                    description: "Superesportivo Lamborghini Aventador com portas abertas e detalhes internos."
+                }
+            ];
+            
+            // Se não há query, mostrar todos os produtos
+            if (!query) {
+                displayProducts(staticProducts, 'productsGrid');
+                return;
+            }
+            
+            // Filtrar produtos baseado na busca
+            const filtered = staticProducts.filter(product => 
+                product.name.toLowerCase().includes(query) ||
+                product.description.toLowerCase().includes(query)
+            );
+            
+            displayProducts(filtered, 'productsGrid');
         }
 
         function displayProducts(products, containerId) {
@@ -1498,6 +1537,18 @@
         document.getElementById('loginModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
+            }
+        });
+
+        // Event listener para busca com Enter
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        searchProducts();
+                    }
+                });
             }
         });
 
