@@ -55,9 +55,18 @@ def proxy(path):
         
         # Retornar resposta do backend
         try:
-            return jsonify(response.json()), response.status_code
-        except:
-            return response.text, response.status_code
+            # Tentar retornar como JSON
+            json_data = response.json()
+            return jsonify(json_data), response.status_code
+        except ValueError:
+            # Se não for JSON válido, retornar como texto
+            return response.text, response.status_code, {'Content-Type': 'text/plain'}
+        except Exception as e:
+            print(f"Erro ao processar resposta: {e}")
+            print(f"Content-Type: {response.headers.get('content-type')}")
+            print(f"Status: {response.status_code}")
+            print(f"Raw content: {response.content[:100]}")
+            return jsonify({"error": "Erro ao processar resposta do backend"}), 500
             
     except requests.exceptions.RequestException as e:
         print(f"Erro na requisição: {e}")
