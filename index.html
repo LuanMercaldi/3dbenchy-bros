@@ -735,6 +735,50 @@
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
             margin: 0;
         }
+
+        /* CATEGORY FILTERS STYLES */
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8px;
+            padding: 8px 12px;
+            border: 2px solid #ff00ff;
+            background: rgba(255, 0, 255, 0.1);
+            color: #ff00ff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+        }
+
+        .category-btn:hover {
+            background: rgba(255, 0, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .category-btn.active {
+            background: rgba(255, 0, 255, 0.3);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+            border-color: #ff00ff;
+        }
+
+        @media (max-width: 768px) {
+            .category-filters {
+                gap: 5px;
+            }
+            
+            .category-btn {
+                font-size: 6px;
+                padding: 6px 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -800,6 +844,28 @@
                 <button onclick="searchProducts()" style="padding: 10px 15px; background: #00ffff; border: none; border-radius: 5px; color: #000; cursor: pointer;">
                     🔍 BUSCAR
                 </button>
+            </div>
+
+            <!-- FILTROS DE CATEGORIA -->
+            <div style="margin-bottom: 30px; text-align: center;">
+                <h3 style="color: #ff00ff; margin-bottom: 15px; font-size: 10px;">🏷️ FILTRAR POR CATEGORIA</h3>
+                <div class="category-filters">
+                    <button class="category-btn active" onclick="filterByCategory('todos')" id="filter-todos">
+                        📦 TODOS
+                    </button>
+                    <button class="category-btn" onclick="filterByCategory('aeronaves')" id="filter-aeronaves">
+                        ✈️ AERONAVES
+                    </button>
+                    <button class="category-btn" onclick="filterByCategory('terrestres')" id="filter-terrestres">
+                        🚗 TERRESTRES
+                    </button>
+                    <button class="category-btn" onclick="filterByCategory('navais')" id="filter-navais">
+                        🚢 NAVAIS
+                    </button>
+                    <button class="category-btn" onclick="filterByCategory('ficcao')" id="filter-ficcao">
+                        🚀 FICÇÃO
+                    </button>
+                </div>
             </div>
 
             <div class="products-grid" id="productsGrid">
@@ -1041,92 +1107,62 @@
             });
         }
 
-        function loadStaticProducts(containerId) {
-            // Produtos estáticos para demonstração
-            const staticProducts = [
+        // Produtos estáticos globais com categorias
+        function getStaticProducts() {
+            return [
                 {
                     id: 1,
                     name: "Apache AH-64 Helicopter",
                     price: 89.90,
+                    category: "aeronaves",
                     description: "Modelo detalhado do helicóptero de combate Apache AH-64. Perfeito para colecionadores e entusiastas de aviação militar."
                 },
                 {
                     id: 2,
                     name: "F-22 Raptor Fighter Jet",
                     price: 129.90,
+                    category: "aeronaves",
                     description: "Caça stealth F-22 Raptor em escala detalhada. Inclui detalhes internos e externos precisos."
                 },
                 {
                     id: 3,
                     name: "M1A2 Abrams Tank",
                     price: 149.90,
+                    category: "terrestres",
                     description: "Tanque de guerra M1A2 Abrams com detalhes realistas. Inclui torre móvel e canhão articulado."
                 },
                 {
                     id: 4,
                     name: "USS Enterprise Aircraft Carrier",
                     price: 199.90,
+                    category: "navais",
                     description: "Porta-aviões USS Enterprise em escala reduzida. Deck de voo detalhado com marcações realistas."
                 },
                 {
                     id: 5,
                     name: "Millennium Falcon",
                     price: 179.90,
+                    category: "ficcao",
                     description: "Nave espacial icônica de Star Wars com detalhes internos. Perfeita para fãs da saga."
                 },
                 {
                     id: 6,
                     name: "Lamborghini Aventador",
                     price: 99.90,
+                    category: "terrestres",
                     description: "Superesportivo Lamborghini Aventador com portas abertas e detalhes internos."
                 }
             ];
-            
+        }
+
+        function loadStaticProducts(containerId) {
+            const staticProducts = getStaticProducts();
             displayProducts(staticProducts, containerId);
         }
 
         function searchProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            
-            // Produtos estáticos para busca
-            const staticProducts = [
-                {
-                    id: 1,
-                    name: "Apache AH-64 Helicopter",
-                    price: 89.90,
-                    description: "Modelo detalhado do helicóptero de combate Apache AH-64. Perfeito para colecionadores e entusiastas de aviação militar."
-                },
-                {
-                    id: 2,
-                    name: "F-22 Raptor Fighter Jet",
-                    price: 129.90,
-                    description: "Caça stealth F-22 Raptor em escala detalhada. Inclui detalhes internos e externos precisos."
-                },
-                {
-                    id: 3,
-                    name: "M1A2 Abrams Tank",
-                    price: 149.90,
-                    description: "Tanque de guerra M1A2 Abrams com detalhes realistas. Inclui torre móvel e canhão articulado."
-                },
-                {
-                    id: 4,
-                    name: "USS Enterprise Aircraft Carrier",
-                    price: 199.90,
-                    description: "Porta-aviões USS Enterprise em escala reduzida. Deck de voo detalhado com marcações realistas."
-                },
-                {
-                    id: 5,
-                    name: "Millennium Falcon",
-                    price: 179.90,
-                    description: "Nave espacial icônica de Star Wars com detalhes internos. Perfeita para fãs da saga."
-                },
-                {
-                    id: 6,
-                    name: "Lamborghini Aventador",
-                    price: 99.90,
-                    description: "Superesportivo Lamborghini Aventador com portas abertas e detalhes internos."
-                }
-            ];
+            const staticProducts = getStaticProducts();
             
             // Se não há query, mostrar todos os produtos
             if (!query) {
@@ -1143,6 +1179,32 @@
             displayProducts(filtered, 'productsGrid');
         }
 
+        // Filtrar produtos por categoria
+        function filterByCategory(category) {
+            const staticProducts = getStaticProducts();
+            
+            // Remover classe active de todos os botões
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Adicionar classe active ao botão clicado
+            document.getElementById(`filter-${category}`).classList.add('active');
+            
+            // Filtrar produtos
+            let filtered;
+            if (category === 'todos') {
+                filtered = staticProducts;
+            } else {
+                filtered = staticProducts.filter(product => product.category === category);
+            }
+            
+            displayProducts(filtered, 'productsGrid');
+            
+            // Limpar campo de busca
+            document.getElementById('searchInput').value = '';
+        }
+
         function displayProducts(products, containerId) {
             const container = document.getElementById(containerId);
             
@@ -1151,9 +1213,22 @@
                 return;
             }
 
+            // Função para obter ícone único por produto
+            function getProductIcon(productId, productName) {
+                const icons = {
+                    1: '🚁', // Apache AH-64 Helicopter
+                    2: '✈️', // F-22 Raptor Fighter Jet
+                    3: '🚗', // M1A2 Abrams Tank (usando carro como placeholder para tanque)
+                    4: '🚢', // USS Enterprise Aircraft Carrier
+                    5: '🚀', // Millennium Falcon
+                    6: '🏎️'  // Lamborghini Aventador
+                };
+                return icons[productId] || '📦';
+            }
+
             container.innerHTML = products.map(product => `
                 <div class="product-card">
-                    <div class="product-image">🚁</div>
+                    <div class="product-image">${getProductIcon(product.id, product.name)}</div>
                     <div class="product-name">${product.name}</div>
                     <div class="product-price">R$ ${product.price.toFixed(2).replace('.', ',')}</div>
                     <div class="product-description">${product.description}</div>
