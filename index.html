@@ -559,9 +559,28 @@
         }
 
         .auth-message.success {
-            background: rgba(0, 255, 0, 0.1);
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 200, 0, 0.1));
             border: 2px solid #00ff00;
             color: #00ff00;
+            font-weight: bold;
+            animation: successPulse 0.6s ease-in-out;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            transform: scale(1);
+        }
+
+        @keyframes successPulse {
+            0% { 
+                transform: scale(1); 
+                box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            }
+            50% { 
+                transform: scale(1.05); 
+                box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+            }
+            100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            }
         }
 
         .auth-message.error {
@@ -1543,16 +1562,30 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    showAuthMessage('Conta criada com sucesso! Faça login para continuar.', 'success');
+                    showAuthMessage('✅ Conta criada com sucesso! Redirecionando para login...', 'success');
+                    
                     // Limpar formulário
                     document.getElementById('registerName').value = '';
                     document.getElementById('registerEmail').value = '';
                     document.getElementById('registerPassword').value = '';
                     document.getElementById('confirmPassword').value = '';
-                    // Voltar para tela de login após 2 segundos
+                    
+                    // Adicionar feedback visual adicional no botão
+                    const createButton = document.querySelector('#registerForm button[type="submit"]');
+                    if (createButton) {
+                        createButton.textContent = '✅ Conta Criada!';
+                        createButton.style.backgroundColor = '#00ff00';
+                        createButton.style.color = '#000';
+                        createButton.disabled = true;
+                    }
+                    
+                    // Voltar para tela de login após 4 segundos (mais tempo para ler)
                     setTimeout(() => {
-                        showLoginForm();
-                    }, 2000);
+                        showAuthMessage('Agora você pode fazer login com suas credenciais!', 'success');
+                        setTimeout(() => {
+                            showLoginForm();
+                        }, 2000);
+                    }, 4000);
                 } else {
                     showAuthMessage(data.error || 'Erro ao criar conta');
                 }
