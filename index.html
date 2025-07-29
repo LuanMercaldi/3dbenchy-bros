@@ -883,7 +883,7 @@
 
     <script>
         // Configuração da API - Integração com backend Manus
-        const API_BASE_URL = 'https://kkh7ikcl8q33.manus.space/api';
+        const API_BASE_URL = 'https://zmhqivcvx58n.manus.space/api';
         
         // Estado da aplicação
         let currentUser = null;
@@ -1350,7 +1350,7 @@
 
                 const data = await response.json();
 
-                if (response.ok && data.success) {
+                if (response.ok) {
                     showAuthMessage('Login realizado com sucesso!', 'success');
                     currentUser = data.user;
                     updateUIAfterLogin();
@@ -1409,12 +1409,16 @@
 
                 const data = await response.json();
 
-                if (response.ok && data.success) {
-                    showAuthMessage('Conta criada com sucesso! Você já está logado.', 'success');
-                    currentUser = data.user;
-                    updateUIAfterLogin();
+                if (response.ok) {
+                    showAuthMessage('Conta criada com sucesso! Faça login para continuar.', 'success');
+                    // Limpar formulário
+                    document.getElementById('registerName').value = '';
+                    document.getElementById('registerEmail').value = '';
+                    document.getElementById('registerPassword').value = '';
+                    document.getElementById('confirmPassword').value = '';
+                    // Voltar para tela de login após 2 segundos
                     setTimeout(() => {
-                        closeModal();
+                        showLoginForm();
                     }, 2000);
                 } else {
                     showAuthMessage(data.error || 'Erro ao criar conta');
