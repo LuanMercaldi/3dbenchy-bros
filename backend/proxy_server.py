@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Aplicação Principal 3DBenchy Bros
-Backend Flask com PostgreSQL para autenticação e persistência
+Backend Flask com SQLite para autenticação e persistência
 """
 
 from flask import Flask, request, jsonify
@@ -195,7 +195,7 @@ if __name__ == '__main__':
     debug = os.environ.get('FLASK_ENV') == 'development'
     
     print(f"🚀 Iniciando 3DBenchy Bros Backend na porta {port}")
-    print(f"🗄️ Banco de dados: {'PostgreSQL' if db else 'Não disponível'}")
+    print(f"🗄️ Banco de dados: {'SQLite' if db else 'Não disponível'}")
     print(f"🌐 CORS configurado para: https://3dbenchybros.com.br")
     
     app.run(host='0.0.0.0', port=port, debug=debug)
