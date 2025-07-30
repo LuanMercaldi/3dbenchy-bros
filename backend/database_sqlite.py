@@ -62,7 +62,15 @@ class DatabaseManager:
             conn.close()
             
             print(f"✅ Usuário criado: {email} (ID: {user_id})")
-            return {'success': True, 'message': 'Usuário criado com sucesso', 'user_id': user_id}
+            return {
+                'success': True, 
+                'message': 'Usuário criado com sucesso', 
+                'user': {
+                    'id': user_id,
+                    'name': name,
+                    'email': email
+                }
+            }
             
         except Exception as e:
             print(f"❌ Erro ao criar usuário: {e}")
@@ -86,7 +94,8 @@ class DatabaseManager:
             if user:
                 print(f"✅ Login bem-sucedido: {email}")
                 return {
-                    'success': True, 
+                    'success': True,
+                    'message': 'Login realizado com sucesso',
                     'user': {
                         'id': user[0],
                         'name': user[1],
