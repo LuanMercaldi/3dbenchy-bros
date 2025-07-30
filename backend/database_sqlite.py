@@ -48,7 +48,7 @@ class DatabaseManager:
             cursor.execute('SELECT id FROM users WHERE email = ?', (email,))
             if cursor.fetchone():
                 conn.close()
-                return {'success': False, 'message': 'Email já cadastrado'}
+                return {'success': False, 'error': 'Email já cadastrado', 'code': 'EMAIL_EXISTS'}
             
             # Criar usuário
             password_hash = self.hash_password(password)
@@ -66,7 +66,7 @@ class DatabaseManager:
             
         except Exception as e:
             print(f"❌ Erro ao criar usuário: {e}")
-            return {'success': False, 'message': 'Erro interno do servidor'}
+            return {'success': False, 'error': 'Erro interno do servidor'}
     
     def authenticate_user(self, email, password):
         """Autentica usuário"""
@@ -95,11 +95,11 @@ class DatabaseManager:
                 }
             else:
                 print(f"❌ Login falhou: {email}")
-                return {'success': False, 'message': 'Email ou senha incorretos'}
+                return {'success': False, 'error': 'Email ou senha incorretos'}
                 
         except Exception as e:
             print(f"❌ Erro na autenticação: {e}")
-            return {'success': False, 'message': 'Erro interno do servidor'}
+            return {'success': False, 'error': 'Erro interno do servidor'}
     
     def get_user_count(self):
         """Retorna número total de usuários"""
