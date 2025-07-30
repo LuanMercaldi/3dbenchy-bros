@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Servidor Proxy para 3DBenchy Bros
-Resolve problemas de CORS intermediando requisições entre frontend e backend
+Aplicação Principal 3DBenchy Bros
+Backend Flask com PostgreSQL para autenticação e persistência
 """
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import requests
 import os
 from dotenv import load_dotenv
+from database import DatabaseManager
 
 # Carregar variáveis de ambiente
 load_dotenv()
@@ -22,90 +22,180 @@ if os.environ.get('FLASK_ENV') == 'development':
 
 CORS(app, origins=cors_origins, supports_credentials=True)
 
-# URL do backend original
-BACKEND_URL = "https://0vhlizcklvgn.manus.space/api"
+# Inicializar gerenciador de banco de dados
+try:
+    db = DatabaseManager()
+    print("✅ Banco de dados inicializado com sucesso")
+except Exception as e:
+    print(f"❌ Erro ao inicializar banco de dados: {e}")
+    db = None
 
-@app.route('/api/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
-def proxy(path):
+@app.route('/api/auth/register', methods=['POST'])
+def register():
     """
-    Proxy para todas as requisições da API
+    Endpoint para cadastro de usuários
     """
+    if not db:
+        return jsonify({"error": "Banco de dados não disponível"}), 500
+    
     try:
-        # URL completa do backend
-        url = f"{BACKEND_URL}/{path}"
+        data = request.get_json()
         
-        # Preparar headers (remover headers problemáticos)
-        headers = {}
-        for key, value in request.headers:
-            if key.lower() not in ['host', 'content-length']:
-                headers[key] = value
+        # Validar dados obrigatórios
+        if not data or not all(k in data for k in ['name', 'email', 'password']):
+            return jsonify({
+                "error": "Dados obrigatórios: name, email, password"
+            }), 400
         
-        # Fazer requisição para o backend original
-        if request.method == 'GET':
-            response = requests.get(url, headers=headers, params=request.args)
-        elif request.method == 'POST':
-            response = requests.post(url, headers=headers, json=request.get_json(), params=request.args)
-        elif request.method == 'PUT':
-            response = requests.put(url, headers=headers, json=request.get_json(), params=request.args)
-        elif request.method == 'DELETE':
-            response = requests.delete(url, headers=headers, params=request.args)
-        elif request.method == 'OPTIONS':
-            # Responder diretamente para requisições OPTIONS (preflight)
-            return '', 200
+        name = data['name'].strip()
+        email = data['email'].strip().lower()
+        password = data['password']
         
-        # Retornar resposta do backend
-        try:
-            # Tentar retornar como JSON
-            json_data = response.json()
-            return jsonify(json_data), response.status_code
-        except ValueError:
-            # Se não for JSON válido, retornar como texto
-            return response.text, response.status_code, {'Content-Type': 'text/plain'}
-        except Exception as e:
-            print(f"Erro ao processar resposta: {e}")
-            print(f"Content-Type: {response.headers.get('content-type')}")
-            print(f"Status: {response.status_code}")
-            print(f"Raw content: {response.content[:100]}")
-            return jsonify({"error": "Erro ao processar resposta do backend"}), 500
+        # Validações básicas
+        if len(name) < 2:
+            return jsonify({"error": "Nome deve ter pelo menos 2 caracteres"}), 400
+        
+        if len(password) < 6:
+            return jsonify({"error": "Senha deve ter pelo menos 6 caracteres"}), 400
+        
+        if '@' not in email or '.' not in email:
+            return jsonify({"error": "Email inválido"}), 400
+        
+        # Criar usuário
+        result = db.create_user(name, email, password)
+        
+        if result['success']:
+            return jsonify({
+                "message": result['message'],
+                "user": result['user']
+            }), 201
+        else:
+            status_code = 409 if result.get('code') == 'EMAIL_EXISTS' else 400
+            return jsonify({"error": result['error']}), status_code
             
-    except requests.exceptions.RequestException as e:
-        print(f"Erro na requisição: {e}")
-        return jsonify({"error": "Erro de conexão com o backend"}), 500
     except Exception as e:
-        print(f"Erro interno: {e}")
+        print(f"❌ Erro no cadastro: {e}")
+        return jsonify({"error": "Erro interno do servidor"}), 500
+
+@app.route('/api/auth/login', methods=['POST'])
+def login():
+    """
+    Endpoint para login de usuários
+    """
+    if not db:
+        return jsonify({"error": "Banco de dados não disponível"}), 500
+    
+    try:
+        data = request.get_json()
+        
+        # Validar dados obrigatórios
+        if not data or not all(k in data for k in ['email', 'password']):
+            return jsonify({
+                "error": "Dados obrigatórios: email, password"
+            }), 400
+        
+        email = data['email'].strip().lower()
+        password = data['password']
+        
+        # Autenticar usuário
+        result = db.authenticate_user(email, password)
+        
+        if result['success']:
+            return jsonify({
+                "message": result['message'],
+                "user": result['user']
+            }), 200
+        else:
+            return jsonify({"error": result['error']}), 401
+            
+    except Exception as e:
+        print(f"❌ Erro no login: {e}")
+        return jsonify({"error": "Erro interno do servidor"}), 500
+
+@app.route('/api/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    """
+    Endpoint para buscar usuário por ID
+    """
+    if not db:
+        return jsonify({"error": "Banco de dados não disponível"}), 500
+    
+    try:
+        user = db.get_user_by_id(user_id)
+        
+        if user:
+            return jsonify({"user": user}), 200
+        else:
+            return jsonify({"error": "Usuário não encontrado"}), 404
+            
+    except Exception as e:
+        print(f"❌ Erro ao buscar usuário: {e}")
         return jsonify({"error": "Erro interno do servidor"}), 500
 
 @app.route('/health', methods=['GET'])
 def health():
     """
-    Endpoint de saúde do proxy
+    Endpoint de saúde da aplicação
     """
-    return jsonify({
+    app_health = {
         "status": "ok",
-        "message": "Proxy server is running",
-        "backend_url": BACKEND_URL
-    })
+        "message": "3DBenchy Bros Backend is running",
+        "version": "2.0.0",
+        "features": ["postgresql", "authentication", "cors"]
+    }
+    
+    if db:
+        db_health = db.health_check()
+        app_health["database"] = db_health
+    else:
+        app_health["database"] = {"status": "unavailable"}
+    
+    return jsonify(app_health)
 
 @app.route('/', methods=['GET'])
 def index():
     """
-    Página inicial do proxy
+    Página inicial da API
     """
     return jsonify({
-        "message": "3DBenchy Bros Proxy Server",
-        "version": "1.0.0",
+        "message": "3DBenchy Bros API",
+        "version": "2.0.0",
         "endpoints": {
-            "/api/*": "Proxy para backend API",
-            "/health": "Status do servidor"
-        }
+            "/api/auth/register": "POST - Cadastro de usuários",
+            "/api/auth/login": "POST - Login de usuários",
+            "/api/users/<id>": "GET - Buscar usuário por ID",
+            "/health": "GET - Status da aplicação"
+        },
+        "database": "postgresql" if db else "unavailable"
     })
+
+@app.errorhandler(404)
+def not_found(error):
+    """
+    Handler para rotas não encontradas
+    """
+    return jsonify({"error": "Endpoint não encontrado"}), 404
+
+@app.errorhandler(405)
+def method_not_allowed(error):
+    """
+    Handler para métodos não permitidos
+    """
+    return jsonify({"error": "Método não permitido"}), 405
+
+@app.errorhandler(500)
+def internal_error(error):
+    """
+    Handler para erros internos
+    """
+    return jsonify({"error": "Erro interno do servidor"}), 500
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     debug = os.environ.get('FLASK_ENV') == 'development'
     
-    print(f"🚀 Iniciando servidor proxy na porta {port}")
-    print(f"🔗 Backend URL: {BACKEND_URL}")
+    print(f"🚀 Iniciando 3DBenchy Bros Backend na porta {port}")
+    print(f"🗄️ Banco de dados: {'PostgreSQL' if db else 'Não disponível'}")
     print(f"🌐 CORS configurado para: https://3dbenchybros.com.br")
     
     app.run(host='0.0.0.0', port=port, debug=debug)
