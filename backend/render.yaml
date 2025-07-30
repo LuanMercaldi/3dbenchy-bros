@@ -3,10 +3,8 @@ services:
     name: 3dbenchy-bros-backend
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python proxy_server.py
+    startCommand: python app.py
     envVars:
       - key: FLASK_ENV
         value: production
-      - key: BACKEND_URL
-        value: https://0vhlizcklvgn.manus.space/api
 
