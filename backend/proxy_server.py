@@ -8,7 +8,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
-from database import DatabaseManager
+from database_sqlite import DatabaseManager
 
 # Carregar variáveis de ambiente
 load_dotenv()
