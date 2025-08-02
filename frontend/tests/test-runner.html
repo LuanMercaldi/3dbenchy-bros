@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testes - 3DBenchy Bros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+        .test-pass {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .test-fail {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .test-summary {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Testes Automatizados - 3DBenchy Bros</h1>
+    
+    <div class="test-container">
+        <h2>Resultados dos Testes</h2>
+        <div id="test-results"></div>
+        <div id="test-summary" class="test-summary"></div>
+    </div>
+
+    <!-- Incluir arquivos da aplicação -->
+    <script src="../js/config.js"></script>
+    <script src="../js/security.js"></script>
+    
+    <!-- Framework de testes simples -->
+    <script>
+        class SimpleTestFramework {
+            constructor() {
+                this.tests = [];
+                this.results = [];
+            }
+
+            test(name, testFunction) {
+                this.tests.push({ name, testFunction });
+            }
+
+            async runAll() {
+                const resultsContainer = document.getElementById('test-results');
+                const summaryContainer = document.getElementById('test-summary');
+                
+                let passed = 0;
+                let failed = 0;
+
+                for (const test of this.tests) {
+                    try {
+                        await test.testFunction();
+                        this.logResult(test.name, true, null);
+                        passed++;
+                    } catch (error) {
+                        this.logResult(test.name, false, error.message);
+                        failed++;
+                    }
+                }
+
+                // Mostrar resumo
+                summaryContainer.innerHTML = `
+                    <div class="${failed === 0 ? 'test-pass' : 'test-fail'}">
+                        Total: ${this.tests.length} | Passou: ${passed} | Falhou: ${failed}
+                    </div>
+                `;
+            }
+
+            logResult(testName, passed, error) {
+                const resultsContainer = document.getElementById('test-results');
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `test-result ${passed ? 'test-pass' : 'test-fail'}`;
+                
+                if (passed) {
+                    resultDiv.innerHTML = `✅ ${testName}`;
+                } else {
+                    resultDiv.innerHTML = `❌ ${testName}<br><small>${error}</small>`;
+                }
+                
+                resultsContainer.appendChild(resultDiv);
+            }
+
+            assert(condition, message) {
+                if (!condition) {
+                    throw new Error(message || 'Assertion failed');
+                }
+            }
+
+            assertEqual(actual, expected, message) {
+                if (actual !== expected) {
+                    throw new Error(message || `Expected ${expected}, got ${actual}`);
+                }
+            }
+
+            assertNotNull(value, message) {
+                if (value === null || value === undefined) {
+                    throw new Error(message || 'Value should not be null or undefined');
+                }
+            }
+        }
+
+        // Criar instância do framework
+        const testFramework = new SimpleTestFramework();
+    </script>
+
+    <!-- Testes de Segurança -->
+    <script>
+        // Testes para SecurityManager
+        testFramework.test('SecurityManager - Sanitizar HTML', () => {
+            const maliciousHTML = '<script>alert("XSS")</script><p>Texto seguro</p>';
+            const sanitized = securityManager.sanitizeHTML(maliciousHTML);
+            
+            testFramework.assert(!sanitized.includes('<script>'), 'Script tag deve ser removido');
+            testFramework.assert(sanitized.includes('Texto seguro'), 'Texto seguro deve permanecer');
+        });
+
+        testFramework.test('SecurityManager - Escapar HTML', () => {
+            const maliciousText = '<script>alert("XSS")</script>';
+            const escaped = securityManager.escapeHTML(maliciousText);
+            
+            testFramework.assert(escaped.includes('&lt;script&gt;'), 'Tags devem ser escapadas');
+            testFramework.assert(!escaped.includes('<script>'), 'Tags originais não devem existir');
+        });
+
+        testFramework.test('SecurityManager - Validar Email', () => {
+            testFramework.assert(securityManager.validateEmail('teste@exemplo.com'), 'Email válido deve passar');
+            testFramework.assert(!securityManager.validateEmail('email-invalido'), 'Email inválido deve falhar');
+            testFramework.assert(!securityManager.validateEmail(''), 'Email vazio deve falhar');
+        });
+
+        testFramework.test('SecurityManager - Validar Senha', () => {
+            const strongPassword = 'MinhaSenh@123';
+            const weakPassword = '123';
+            
+            const strongResult = securityManager.validatePassword(strongPassword);
+            const weakResult = securityManager.validatePassword(weakPassword);
+            
+            testFramework.assert(strongResult.valid, 'Senha forte deve ser válida');
+            testFramework.assert(!weakResult.valid, 'Senha fraca deve ser inválida');
+            testFramework.assert(weakResult.errors.length > 0, 'Senha fraca deve ter erros');
+        });
+
+        testFramework.test('SecurityManager - Sanitizar Input', () => {
+            const maliciousInput = '<script>alert("XSS")</script>Nome do Usuário';
+            const sanitized = securityManager.sanitizeInput(maliciousInput);
+            
+            testFramework.assert(!sanitized.includes('<script>'), 'Script deve ser removido');
+            testFramework.assert(sanitized.includes('Nome do Usuário'), 'Texto válido deve permanecer');
+        });
+
+        testFramework.test('SecurityManager - Rate Limiter', () => {
+            const rateLimiter = securityManager.createRateLimiter(2, 1000); // 2 requests per second
+            
+            testFramework.assert(rateLimiter('user1'), 'Primeira requisição deve passar');
+            testFramework.assert(rateLimiter('user1'), 'Segunda requisição deve passar');
+            testFramework.assert(!rateLimiter('user1'), 'Terceira requisição deve ser bloqueada');
+        });
+    </script>
+
+    <!-- Testes de Configuração -->
+    <script>
+        testFramework.test('CONFIG - Configurações básicas', () => {
+            testFramework.assertNotNull(CONFIG, 'CONFIG deve existir');
+            testFramework.assertNotNull(CONFIG.API_BASE_URL, 'API_BASE_URL deve estar definida');
+            testFramework.assertNotNull(CONFIG.APP_NAME, 'APP_NAME deve estar definida');
+            testFramework.assertEqual(CONFIG.APP_NAME, '3DBenchy Bros', 'Nome da aplicação deve estar correto');
+        });
+    </script>
+
+    <!-- Testes de Utilitários -->
+    <script>
+        testFramework.test('Utilitários - Formatação de preço', () => {
+            function formatPrice(price) {
+                return `R$ ${price.toFixed(2).replace('.', ',')}`;
+            }
+            
+            testFramework.assertEqual(formatPrice(99.99), 'R$ 99,99', 'Preço deve ser formatado corretamente');
+            testFramework.assertEqual(formatPrice(100), 'R$ 100,00', 'Preço inteiro deve ter decimais');
+        });
+
+        testFramework.test('Utilitários - Validação de ID', () => {
+            function isValidId(id) {
+                return Number.isInteger(id) && id > 0;
+            }
+            
+            testFramework.assert(isValidId(1), 'ID 1 deve ser válido');
+            testFramework.assert(isValidId(100), 'ID 100 deve ser válido');
+            testFramework.assert(!isValidId(0), 'ID 0 deve ser inválido');
+            testFramework.assert(!isValidId(-1), 'ID negativo deve ser inválido');
+            testFramework.assert(!isValidId('abc'), 'ID string deve ser inválido');
+        });
+    </script>
+
+    <!-- Executar testes quando a página carregar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Iniciando testes...');
+            testFramework.runAll();
+        });
+    </script>
+</body>
+</html>
