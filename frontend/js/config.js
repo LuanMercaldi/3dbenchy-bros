@@ -1,9 +1,11 @@
 // Configurações da aplicação
 const CONFIG = {
-    // URL base da API
-    API_BASE_URL: 'http://localhost:5000',
+    // URL base da API - detecta automaticamente o ambiente
+    API_BASE_URL: window.location.hostname === 'localhost' 
+        ? 'http://localhost:5000' 
+        : 'https://seu-backend-render.onrender.com',
     
-    // Nome da aplicação (para os testes )
+    // Nome da aplicação
     APP_NAME: '3DBenchy Bros',
     
     // Endpoints da API
@@ -23,13 +25,10 @@ const CONFIG = {
     APP: {
         NAME: '3DBenchy Bros',
         VERSION: '1.0.0',
-        DEBUG: true
+        DEBUG: window.location.hostname === 'localhost'
     }
 };
 
 // Tornar CONFIG disponível globalmente
 window.CONFIG = CONFIG;
-
-// Também disponibilizar APP_NAME diretamente (para compatibilidade com testes)
 window.APP_NAME = CONFIG.APP_NAME;
-
