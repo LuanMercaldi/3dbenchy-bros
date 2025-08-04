@@ -1,11 +1,13 @@
 import sqlite3
+import psycopg2
+import psycopg2.extras
 import hashlib
 import secrets
 import jwt
+import os
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any, List
-from config import Config
-
+from urllib.parse import urlparse
 
 class DatabaseManager:
     """Gerenciador de banco de dados SQLite com funcionalidades completas"""
@@ -556,4 +558,5 @@ class DatabaseManager:
                 'status': 'unhealthy',
                 'error': str(e),
                 'database': 'sqlite'
+
             }
