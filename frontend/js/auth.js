@@ -110,10 +110,58 @@ class AuthManager {
             localStorage.setItem('client_id', clientId);
         }
         return clientId;
+    
     }
-
+    async checkAuthStatus() {
+        try {
+            // Verificar se existe token armazenado
+            const token = localStorage.getItem('access_token');
+            if (!token) {
+                this.currentUser = null;
+                return false;
+            }
+    
+            // Validar token com o backend
+            const response = await fetch(`${CONFIG.API_BASE_URL}/api/auth/verify`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (response.ok) {
+                const userData = await response.json();
+                this.currentUser = userData.user;
+                this.updateUIForLoggedInUser();
+                return true;
+            } else {
+                // Token inválido, limpar armazenamento
+                this.logout();
+                return false;
+            }
+        } catch (error) {
+            console.error('Erro ao verificar status de autenticação:', error);
+            return false;
+        }
+    }
+    
+    updateUIForLoggedInUser() {
+        const loginBtn = document.getElementById('loginBtn');
+        const adminBtn = document.getElementById('adminBtn');
+        
+        if (loginBtn) {
+            loginBtn.textContent = 'LOGOUT';
+            loginBtn.onclick = () => this.logout();
+        }
+        
+        if (adminBtn && this.currentUser?.role === 'admin') {
+            adminBtn.style.display = 'block';
+        }
+    }
     
 }
 
 // Criar instância global
+
 const authManager = new AuthManager();
