@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Headers de segurança -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://accounts.google.com;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3DBenchy Bros - E-commerce de Impressão 3D</title>
+    <meta name="description" content="A maior loja de modelos 3D para impressão do Brasil! Helicópteros, aviões, tanques com estética pixelizada dos anos 80. Qualidade profissional garantida.">
+    <meta name="keywords" content="impressão 3D, modelos 3D, 3dbenchy, stl, 3d printing, brasil">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P:wght@400&display=swap" rel="stylesheet">
+    
+</head>
+
+<!--conecta o arquivo CSS ao HTML:-->
+<link rel="stylesheet" href="/css/style.css">
+
+<body>
+    <!-- HEADER FIXO PIXELIZADO -->
+    <header class="pixel-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo">
+                <div class="logo-img"></div>
+                <span class="logo-text">3DBenchy Bros.</span>
+            </div>
+            
+            <!-- Menu Central -->
+            <nav class="header-nav">
+                <a href="#" class="nav-link active" onclick="showSection('home')">INÍCIO</a>
+                <a href="#" class="nav-link" onclick="showSection('products')">PRODUTOS</a>
+                <a href="#" class="nav-link" onclick="showSection('cart')">CARRINHO</a>
+            </nav>
+            
+            <!-- Ações do Usuário -->
+            <div class="header-actions">
+                <button class="action-btn login-btn" onclick="showLoginOptions()" id="loginBtn">LOGIN</button>
+                <button class="action-btn admin-btn" onclick="showSection('admin')" id="adminBtn" style="display: none;">ADMIN</button>
+                <div class="cart-container">
+                    <div class="cart-icon-new" onclick="showSection('cart')">
+                        🛒 <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main role="main">
+        <div class="container">
+        <!-- SEÇÃO HOME -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h1>🚁 BEM-VINDO À 3DBENCHY BROS! 🚁</h1>
+                <p>
+                    A maior loja de modelos 3D para impressão do Brasil!<br>
+                    Helicópteros, aviões, tanques e muito mais com qualidade profissional.
+                </p>
+                <button class="cta-button" onclick="showSection('products')">
+                    🎯 EXPLORAR PRODUTOS
+                </button>
+            </div>
+
+            <div id="featuredProducts">
+                <h2 style="color: #00ffff; text-align: center; margin-bottom: 30px;">🔥 PRODUTOS EM DESTAQUE</h2>
+                <div class="products-grid" id="featuredGrid">
+                    <div class="loading">Carregando produtos...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO PRODUTOS -->
+        <section id="products" class="section">
+            <h2 style="color: #00ffff; text-align: center; margin-bottom: 30px;">📦 TODOS OS PRODUTOS</h2>
+            
+            <div style="margin-bottom: 30px; text-align: center;">
+                <input type="text" id="searchInput" placeholder="Buscar produtos..." 
+                       style="padding: 10px; border-radius: 5px; border: 2px solid #00ffff; background: rgba(0,0,0,0.5); color: #fff; margin-right: 10px;">
+                <button onclick="searchProducts()" style="padding: 10px 15px; background: #00ffff; border: none; border-radius: 5px; color: #000; cursor: pointer;">
+                    🔍 BUSCAR
+                </button>
+            </div>
+
+            <!-- FILTROS DE CATEGORIA -->
+            <div style="margin-bottom: 30px; text-align: center;">
+                <h3 style="color: #ff00ff; margin-bottom: 15px; font-size: 10px;">🏷️ FILTRAR POR CATEGORIA</h3>
+                <div class="category-filters">
+                    <button class="category-btn active" onclick="filterByCategory('todos')" id="filter-todos">
+                        📦 TODOS
+                    </button>
+                    <button class="category-btn" onclick="filterByCategory('aeronaves')" id="filter-aeronaves">
+                        ✈️ AERONAVES
+                    </button>
+                    <button class="category-btn" onclick="filterByCategory('terrestres')" id="filter-terrestres">
+                        🚗 TERRESTRES
+                    </button>
+                    <button class="category-btn" onclick="filterByCategory('navais')" id="filter-navais">
+                        🚢 NAVAIS
+                    </button>
+                    <button class="category-btn" onclick="filterByCategory('ficcao')" id="filter-ficcao">
+                        🚀 FICÇÃO
+                    </button>
+                </div>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <div class="loading">Carregando produtos...</div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO CARRINHO -->
+        <section id="cart" class="section">
+            <h2 style="color: #00ffff; text-align: center; margin-bottom: 30px;">🛒 SEU CARRINHO</h2>
+            
+            <div id="cartItems">
+                <div class="loading">Carregando carrinho...</div>
+            </div>
+
+            <div class="cart-total" id="cartTotal" style="display: none;">
+                <div>Total: R$ <span id="totalAmount">0,00</span></div>
+                <button class="cta-button" onclick="checkout()" style="margin-top: 20px;">
+                    💳 FINALIZAR COMPRA
+                </button>
+            </div>
+        </section>
+
+        <!-- SEÇÃO ADMIN -->
+        <section id="admin" class="section">
+            <h2 style="color: #ffff00; text-align: center; margin-bottom: 30px;">👨‍💼 PAINEL ADMINISTRATIVO</h2>
+            
+            <div class="admin-dashboard" id="adminDashboard">
+                <div class="loading">Carregando dashboard...</div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h3 style="color: #00ffff; margin-bottom: 20px;">📊 PEDIDOS RECENTES</h3>
+                <div id="recentOrders">
+                    <div class="loading">Carregando pedidos...</div>
+                </div>
+            </div>
+        </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 3DBenchy Bros - Todos os direitos reservados</p>
+    </footer>
+
+   <!-- Modal de Login Melhorado -->
+<div id="loginModal" class="modal" role="dialog" aria-labelledby="login-title" aria-hidden="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="login-title">Fazer Login</h2>
+            <button class="close" onclick="authManager.closeModal()" aria-label="Fechar modal">×</button>
+        </div>
+        <div class="modal-body">
+            <p>Escolha uma opção para fazer login:</p>
+            <div class="login-options">
+                <button 
+                    onclick="authManager.loginWithProvider('github')" 
+                    class="login-option github"
+                    aria-label="Fazer login com GitHub"
+                >
+                    <span class="icon">🐙</span>
+                    <span class="text">GitHub</span>
+                </button>
+                <button 
+                    onclick="authManager.loginWithProvider('google')" 
+                    class="login-option google"
+                    aria-label="Fazer login com Google"
+                >
+                    <span class="icon">🔍</span>
+                    <span class="text">Google</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--carregar todos os arquivos JavaScript na ordem correta-->
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/main.js"></script>
+<script src="js/accessibility.js"></script>
+
+</body>
+</html>
+
+
