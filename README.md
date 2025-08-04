@@ -38,18 +38,21 @@ O 3DBenchy Bros é uma plataforma de e-commerce especializada em modelos 3D para
 - **Validação Robusta**: Sanitização de dados de entrada
 - **Headers de Segurança**: Proteção abrangente
 
-## 📋 Pré-requisitos
+## 🚀 Deploy
 
-Antes de começar, certifique-se de ter instalado:
+Este projeto está configurado para deploy automático:
 
-- **Python 3.11+**: [Download Python](https://python.org/downloads/)
-- **Git**: [Download Git](https://git-scm.com/downloads)
-- **Editor de Código**: Recomendamos [VS Code](https://code.visualstudio.com/)
+- **Frontend**: GitHub Pages
+- **Backend**: Render.com
+- **Base de Dados**: PostgreSQL (Render.com)
 
-## 🛠️ Instalação e Configuração
+### Deploy do Frontend
 
-### 1. Clonar o Repositório
+O frontend é automaticamente deployado via GitHub Pages sempre que há push para a branch main.
 
-```bash
-git clone https://github.com/LuanMercaldi/3dbenchy-bros.git
-cd 3dbenchy-bros
+### Deploy do Backend
+
+O backend é deployado no Render.com com as seguintes variáveis de ambiente:
+- `DATABASE_URL`: URL da base de dados PostgreSQL
+- `JWT_SECRET_KEY`: Chave secreta para tokens JWT
+- `SECRET_KEY`: Chave secreta da aplicação Flask
