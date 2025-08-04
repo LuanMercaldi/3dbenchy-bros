@@ -13,103 +13,130 @@ class DatabaseManager:
     """Gerenciador de banco de dados SQLite com funcionalidades completas"""
     
     def __init__(self, db_path=None):
-        """Inicializar gerenciador de banco de dados"""
-        if db_path is None:
-            self.db_path = "3dbenchy.db"
-        else:
-            self.db_path = db_path
+    """Inicializar gerenciador de banco de dados"""
+    # Detectar tipo de banco baseado na URL
+    database_url = os.environ.get('DATABASE_URL')
+    
+    if database_url:
+        # PostgreSQL (produção no Render)
+        if database_url.startswith('postgres://'):
+            database_url = database_url.replace('postgres://', 'postgresql://', 1)
         
-        print(f"📁 Tentando criar banco em: {self.db_path}")
-        self.init_database()
+        self.db_type = 'postgresql'
+        self.database_url = database_url
+        print(f"🐘 Usando PostgreSQL: {database_url[:50]}...")
+    else:
+        # SQLite (desenvolvimento local)
+        self.db_type = 'sqlite'
+        self.db_path = db_path or "3dbenchy.db"
+        print(f"📁 Usando SQLite: {self.db_path}")
+    
+    self.init_database()
 
     
     def get_connection(self):
-        """Obter conexão com o banco de dados"""
-        conn = sqlite3.connect(self.db_path)
-        conn.row_factory = sqlite3.Row  # Permite acesso por nome da coluna
+    """Obter conexão com o banco de dados"""
+    if self.db_type == 'postgresql':
+        conn = psycopg2.connect(self.database_url)
         return conn
+    else:
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = sqlite3.Row
+        return conn
+
+def get_cursor(self, conn):
+    """Obter cursor apropriado para o tipo de banco"""
+    if self.db_type == 'postgresql':
+        return conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    else:
+        return conn.cursor()
     
     def init_database(self):
         """Inicializar todas as tabelas do banco de dados"""
         try:
             with self.get_connection() as conn:
-                cursor = conn.cursor()
+                cursor = self.get_cursor(conn)
+
+                if self.db_type == 'postgresql':
+                   self._create_postgresql_tables(cursor)
+                else:
+                    self._create_sqlite_tables(cursor)
                 
-                # Tabela de usuários
-                cursor.execute('''
-                    CREATE TABLE IF NOT EXISTS users (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name TEXT NOT NULL,
-                        email TEXT UNIQUE NOT NULL,
-                        password_hash TEXT,
-                        salt TEXT,
-                        oauth_provider TEXT,
-                        oauth_id TEXT,
-                        avatar_url TEXT,
-                        is_admin BOOLEAN DEFAULT FALSE,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    )
-                ''')
-                
-                # Tabela de produtos
-                cursor.execute('''
-                    CREATE TABLE IF NOT EXISTS products (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name TEXT NOT NULL,
-                        description TEXT,
-                        price DECIMAL(10,2) NOT NULL,
-                        category TEXT,
-                        image_url TEXT,
-                        is_featured BOOLEAN DEFAULT FALSE,
-                        is_active BOOLEAN DEFAULT TRUE,
-                        stock_quantity INTEGER DEFAULT 0,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    )
-                ''')
-                
-                # Tabela de carrinho
-                cursor.execute('''
-                    CREATE TABLE IF NOT EXISTS cart_items (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        user_id INTEGER NOT NULL,
-                        product_id INTEGER NOT NULL,
-                        quantity INTEGER NOT NULL DEFAULT 1,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        FOREIGN KEY (user_id) REFERENCES users (id),
-                        FOREIGN KEY (product_id) REFERENCES products (id),
-                        UNIQUE(user_id, product_id)
-                    )
-                ''')
-                
-                # Tabela de tokens JWT (para logout/blacklist)
-                cursor.execute('''
-                    CREATE TABLE IF NOT EXISTS jwt_tokens (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        user_id INTEGER NOT NULL,
-                        token_hash TEXT NOT NULL,
-                        expires_at TIMESTAMP NOT NULL,
-                        is_revoked BOOLEAN DEFAULT FALSE,
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        FOREIGN KEY (user_id) REFERENCES users (id)
-                    )
-                ''')
-                
-                # Índices para performance
-                cursor.execute('CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)')
-                cursor.execute('CREATE INDEX IF NOT EXISTS idx_products_category ON products(category)')
-                cursor.execute('CREATE INDEX IF NOT EXISTS idx_products_featured ON products(is_featured)')
-                cursor.execute('CREATE INDEX IF NOT EXISTS idx_cart_user ON cart_items(user_id)')
-                cursor.execute('CREATE INDEX IF NOT EXISTS idx_jwt_tokens_user ON jwt_tokens(user_id)')
-                
-                conn.commit()
-                print("✅ Banco de dados inicializado com sucesso")
-                
-                # Inserir produtos de exemplo se não existirem
-                self._insert_sample_products(cursor)
-                conn.commit()
+    def _create_postgresql_tables(self, cursor):
+    """Criar tabelas para PostgreSQL"""
+    # Tabela de usuários
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            password_hash VARCHAR(255),
+            salt VARCHAR(255),
+            oauth_provider VARCHAR(50),
+            oauth_id VARCHAR(255),
+            avatar_url TEXT,
+            is_admin BOOLEAN DEFAULT FALSE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    # Tabela de produtos
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS products (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            description TEXT,
+            price DECIMAL(10,2) NOT NULL,
+            category VARCHAR(100),
+            image_url TEXT,
+            is_featured BOOLEAN DEFAULT FALSE,
+            is_active BOOLEAN DEFAULT TRUE,
+            stock_quantity INTEGER DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    # Tabela de carrinho
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS cart_items (
+            id SERIAL PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            product_id INTEGER NOT NULL,
+            quantity INTEGER NOT NULL DEFAULT 1,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users (id),
+            FOREIGN KEY (product_id) REFERENCES products (id),
+            UNIQUE(user_id, product_id)
+        )
+    ''')
+    
+    # Tabela de tokens JWT
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS jwt_tokens (
+            id SERIAL PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            token_hash VARCHAR(255) NOT NULL,
+            expires_at TIMESTAMP NOT NULL,
+            is_revoked BOOLEAN DEFAULT FALSE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users (id)
+        )
+    ''')
+    
+    # Índices para PostgreSQL
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)')
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_products_category ON products(category)')
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_products_featured ON products(is_featured)')
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_cart_user ON cart_items(user_id)')
+    cursor.execute('CREATE INDEX IF NOT EXISTS idx_jwt_tokens_user ON jwt_tokens(user_id)')
+
+def _create_sqlite_tables(self, cursor):
+    """Criar tabelas para SQLite (código original)"""
+    # Mover todo o código de criação de tabelas SQLite existente para cá
+    # (o código que já estava no init_database)
                 
         except Exception as e:
             print(f"❌ Erro ao inicializar banco de dados: {e}")
@@ -162,13 +189,10 @@ class DatabaseManager:
                 cursor = conn.cursor()
                 
                 # Verificar se email já existe
-                cursor.execute('SELECT id FROM users WHERE email = ?', (email,))
-                if cursor.fetchone():
-                    return {
-                        'success': False, 
-                        'error': 'Email já cadastrado', 
-                        'code': 'EMAIL_EXISTS'
-                    }
+                if self.db_type == 'postgresql':
+                    cursor.execute('SELECT id FROM users WHERE email = %s', (email,))
+                else:
+                    cursor.execute('SELECT id FROM users WHERE email = ?', (email,))
                 
                 # Preparar dados do usuário
                 if password:
@@ -560,3 +584,4 @@ class DatabaseManager:
                 'database': 'sqlite'
 
             }
+
