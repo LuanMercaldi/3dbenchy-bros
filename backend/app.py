@@ -21,7 +21,7 @@ def create_app(config_name=None):
     # Criar aplicação Flask
     app = Flask(__name__)
     CORS(app, origins=[
-        'https://seu-usuario.github.io',
+        'https://github.com/LuanMercaldi/3dbenchy-bros',
         'https://3dbenchybros.com.br'
     ])
     
@@ -174,4 +174,5 @@ if __name__ == '__main__':
     
 
     app.run(host='0.0.0.0', port=port, debug=debug)
+
 
