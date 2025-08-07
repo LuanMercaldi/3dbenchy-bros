@@ -161,11 +161,12 @@ app = create_app()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    debug = os.environ.get('FLASK_ENV') == 'development'
+    app.run(host='0.0.0.0', port=port, debug=False)
     
     print(f"🚀 Iniciando 3DBenchy Bros Backend na porta {port}")
     print(f"🗄️ Banco de dados: {'SQLite' if app.db else 'Não disponível'}")
     print(f"🌐 CORS configurado para: {app.config['CORS_ORIGINS']}")
     print(f"🔧 Modo debug: {debug}")
     
+
     app.run(host='0.0.0.0', port=port, debug=debug)
