@@ -15,7 +15,7 @@ class Config:
     
     # Configurações CORS - incluir domínio do GitHub Pages
     CORS_ORIGINS = [
-        'https://seu-usuario.github.io',
+        'https://luanmercaldi.github.io',
         'https://3dbenchybros.com.br',  # se tiver domínio personalizado
         'http://localhost:8000',
         'http://127.0.0.1:8000',

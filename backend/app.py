@@ -4,7 +4,7 @@ Aplicação Principal 3DBenchy Bros
 Backend Flask completo com todas as funcionalidades
 """
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
 from config import config
@@ -165,14 +165,13 @@ app = create_app()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    debug = os.environ.get('FLASK_ENV') == 'development'
     
     print(f"🚀 Iniciando 3DBenchy Bros Backend na porta {port}")
     print(f"🗄️ Banco de dados: {'SQLite' if app.db else 'Não disponível'}")
     print(f"🌐 CORS configurado para: {app.config['CORS_ORIGINS']}")
     print(f"🔧 Modo debug: {debug}")
     
-
     app.run(host='0.0.0.0', port=port, debug=debug)
 
 
