@@ -13,36 +13,36 @@ class DatabaseManager:
     """Gerenciador de banco de dados SQLite com funcionalidades completas"""
     
     def __init__(self, db_path=None):
-    """Inicializar gerenciador de banco de dados"""
-    # Detectar tipo de banco baseado na URL
-    database_url = os.environ.get('DATABASE_URL')
+        """Inicializar gerenciador de banco de dados"""
+        # Detectar tipo de banco baseado na URL
+        database_url = os.environ.get('DATABASE_URL')
     
-    if database_url:
-        # PostgreSQL (produção no Render)
-        if database_url.startswith('postgres://'):
-            database_url = database_url.replace('postgres://', 'postgresql://', 1)
+        if database_url:
+            # PostgreSQL (produção no Render)
+            if database_url.startswith('postgres://'):
+                database_url = database_url.replace('postgres://', 'postgresql://', 1)
+            
+            self.db_type = 'postgresql'
+            self.database_url = database_url
+            print(f"🐘 Usando PostgreSQL: {database_url[:50]}...")
+        else:
+            # SQLite (desenvolvimento local)
+            self.db_type = 'sqlite'
+            self.db_path = db_path or "3dbenchy.db"
+            print(f"📁 Usando SQLite: {self.db_path}")
         
-        self.db_type = 'postgresql'
-        self.database_url = database_url
-        print(f"🐘 Usando PostgreSQL: {database_url[:50]}...")
-    else:
-        # SQLite (desenvolvimento local)
-        self.db_type = 'sqlite'
-        self.db_path = db_path or "3dbenchy.db"
-        print(f"📁 Usando SQLite: {self.db_path}")
-    
     self.init_database()
 
     
     def get_connection(self):
-    """Obter conexão com o banco de dados"""
-    if self.db_type == 'postgresql':
-        conn = psycopg2.connect(self.database_url)
-        return conn
-    else:
-        conn = sqlite3.connect(self.db_path)
-        conn.row_factory = sqlite3.Row
-        return conn
+        """Obter conexão com o banco de dados"""
+        if self.db_type == 'postgresql':
+            conn = psycopg2.connect(self.database_url)
+            return conn
+        else:
+            conn = sqlite3.connect(self.db_path)
+            conn.row_factory = sqlite3.Row
+            return conn
 
 def get_cursor(self, conn):
     """Obter cursor apropriado para o tipo de banco"""
@@ -584,4 +584,5 @@ def _create_sqlite_tables(self, cursor):
                 'database': 'sqlite'
 
             }
+
 
