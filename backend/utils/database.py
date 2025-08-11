@@ -17,14 +17,32 @@ class DatabaseManager:
         # Detectar tipo de banco baseado na URL
         database_url = os.environ.get('DATABASE_URL')
         
+        # Debug: mostrar todas as variáveis de ambiente relacionadas ao banco
+        print("🔍 Debug - Variáveis de ambiente do banco:")
+        for key, value in os.environ.items():
+            if any(keyword in key.upper() for keyword in ['DATABASE', 'POSTGRES', 'DB']):
+                print(f"  {key}: {value[:50]}{'...' if len(value) > 50 else ''}")
+        
         if database_url:
-            # PostgreSQL (produção no Render)
-            if database_url.startswith('postgres://'):
-                database_url = database_url.replace('postgres://', 'postgresql://', 1)
+            # Verificar se a DATABASE_URL está no formato correto
+            if not database_url.startswith(('postgres://', 'postgresql://')):
+                print(f"⚠️  DATABASE_URL não parece ser uma URL válida: {database_url}")
+                # Tentar construir URL a partir de componentes individuais
+                database_url = self._build_database_url_from_components()
             
-            self.db_type = 'postgresql'
-            self.database_url = database_url
-            print(f"🐘 Usando PostgreSQL: {database_url[:50]}...")
+            if database_url and database_url.startswith(('postgres://', 'postgresql://')):
+                # PostgreSQL (produção no Render)
+                if database_url.startswith('postgres://'):
+                    database_url = database_url.replace('postgres://', 'postgresql://', 1)
+                
+                self.db_type = 'postgresql'
+                self.database_url = database_url
+                print(f"🐘 Usando PostgreSQL: {database_url[:50]}...")
+            else:
+                print("❌ Não foi possível configurar PostgreSQL, usando SQLite")
+                self.db_type = 'sqlite'
+                self.db_path = db_path or "3dbenchy.db"
+                print(f"📁 Usando SQLite: {self.db_path}")
         else:
             # SQLite (desenvolvimento local)
             self.db_type = 'sqlite'
@@ -32,6 +50,33 @@ class DatabaseManager:
             print(f"📁 Usando SQLite: {self.db_path}")
         
         self.init_database()
+    
+    def _build_database_url_from_components(self):
+        """Tentar construir DATABASE_URL a partir de componentes individuais"""
+        try:
+            # Variáveis comuns que o Render pode usar
+            host = os.environ.get('PGHOST') or os.environ.get('DB_HOST')
+            port = os.environ.get('PGPORT') or os.environ.get('DB_PORT') or '5432'
+            database = os.environ.get('PGDATABASE') or os.environ.get('DB_NAME')
+            user = os.environ.get('PGUSER') or os.environ.get('DB_USER')
+            password = os.environ.get('PGPASSWORD') or os.environ.get('DB_PASSWORD')
+            
+            if all([host, database, user, password]):
+                url = f"postgresql://{user}:{password}@{host}:{port}/{database}"
+                print(f"✅ URL construída a partir de componentes: postgresql://{user}:***@{host}:{port}/{database}")
+                return url
+            else:
+                print("❌ Componentes insuficientes para construir DATABASE_URL")
+                missing = []
+                if not host: missing.append('host')
+                if not database: missing.append('database')
+                if not user: missing.append('user')
+                if not password: missing.append('password')
+                print(f"   Faltando: {', '.join(missing)}")
+                return None
+        except Exception as e:
+            print(f"❌ Erro ao construir DATABASE_URL: {e}")
+            return None
 
     def get_connection(self):
         """Obter conexão com o banco de dados"""
