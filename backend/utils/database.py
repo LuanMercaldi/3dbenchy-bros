@@ -1,6 +1,6 @@
 import sqlite3
-import psycopg2
-import psycopg2.extras
+import psycopg
+from psycopg.rows import dict_row
 import hashlib
 import secrets
 import jwt
@@ -36,7 +36,7 @@ class DatabaseManager:
     def get_connection(self):
         """Obter conexão com o banco de dados"""
         if self.db_type == 'postgresql':
-            conn = psycopg2.connect(self.database_url)
+            conn = psycopg.connect(self.database_url, row_factory=dict_row)
             return conn
         else:
             conn = sqlite3.connect(self.db_path)
@@ -46,7 +46,7 @@ class DatabaseManager:
     def get_cursor(self, conn):
         """Obter cursor apropriado para o tipo de banco"""
         if self.db_type == 'postgresql':
-            return conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+            return conn.cursor()
         else:
             return conn.cursor()
     
