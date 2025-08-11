@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from utils.database import DatabaseManager
-from utils.auth_helpers import require_auth, get_current_user
+from backend.utils.database import DatabaseManager
+from backend.utils.auth_helpers import require_auth, get_current_user
 
 cart_bp = Blueprint('cart', __name__)
 db = DatabaseManager()

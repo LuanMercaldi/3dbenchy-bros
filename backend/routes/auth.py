@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify
-from utils.database import DatabaseManager
-from utils.auth_helpers import require_auth, get_current_user, JWTManager, hash_password, verify_password
-from utils.validators import DataValidator, ValidationError, validate_json
-from utils.rate_limiter import rate_limit, strict_rate_limit
+from backend.utils.database import DatabaseManager
+from backend.utils.auth_helpers import require_auth, get_current_user, JWTManager, hash_password, verify_password
+from backend.utils.validators import DataValidator, ValidationError, validate_json
+from backend.utils.rate_limiter import rate_limit, strict_rate_limit
 
 # DEFINIR O BLUEPRINT PRIMEIRO
 auth_bp = Blueprint('auth', __name__)
