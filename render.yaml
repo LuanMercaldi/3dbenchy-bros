@@ -1,24 +1,25 @@
 databases:
 - name: 3dbenchy-postgres
-databaseName: 3dbenchy_db
-user: 3dbenchy_user
-plan: free
+  databaseName: 3dbenchy_db
+  user: 3dbenchy_user
+  plan: free
+
 services:
 - type: web
-name: 3dbenchy-backend
-env: python
-buildCommand: "pip install -r backend/requirements.txt"
-startCommand: "gunicorn --bind 0.0.0.0:$PORT app:app"
-plan: free
-healthCheckPath: /
-envVars:
-- key: DATABASE_URL
-fromDatabase:
-name: 3dbenchy-postgres
-property: connectionString
-- key: FLASK_ENV
-value: production
-- key: JWT_SECRET_KEY
-generateValue: true
-- key: SECRET_KEY
-generateValue: true
+  name: 3dbenchy-backend
+  env: python
+  buildCommand: "pip install -r backend/requirements.txt"
+  startCommand: "python -m gunicorn --bind 0.0.0.0:$PORT --pythonpath . app:app"
+  plan: free
+  healthCheckPath: /
+  envVars:
+  - key: DATABASE_URL
+    fromDatabase:
+      name: 3dbenchy-postgres
+      property: connectionString
+  - key: FLASK_ENV
+    value: production
+  - key: JWT_SECRET_KEY
+    generateValue: true
+  - key: SECRET_KEY
+    generateValue: true
