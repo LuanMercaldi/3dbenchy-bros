@@ -8,8 +8,8 @@ services:
 - type: web
   name: 3dbenchy-backend
   env: python
-  buildCommand: "pip install -r backend/requirements.txt"
-  startCommand: "python -m gunicorn --bind 0.0.0.0:$PORT --pythonpath . app:app"
+  buildCommand: "pip install -r requirements.txt"
+  startCommand: "gunicorn --bind 0.0.0.0:$PORT app:app"
   plan: free
   healthCheckPath: /
   envVars:

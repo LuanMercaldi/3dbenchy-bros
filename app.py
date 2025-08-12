@@ -7,9 +7,9 @@ Backend Flask completo com todas as funcionalidades
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
-from backend.config import config
-from backend.utils.database import DatabaseManager
-from backend.utils.security_headers import SecurityHeaders
+from config import config
+from utils.database import DatabaseManager
+from utils.security_headers import SecurityHeaders
 
 def create_app(config_name=None):
     """Factory function para criar a aplicação Flask"""
@@ -46,9 +46,9 @@ def create_app(config_name=None):
         app.db = None
     
     # Registrar blueprints (rotas)
-    from backend.routes.auth import auth_bp
-    from backend.routes.products import products_bp
-    from backend.routes.cart import cart_bp
+    from routes.auth import auth_bp
+    from routes.products import products_bp
+    from routes.cart import cart_bp
 
     
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
